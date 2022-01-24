@@ -17,6 +17,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
+import java.util.ArrayList;
 
 public class PlanetScreen implements Screen
 {
@@ -45,6 +46,10 @@ public class PlanetScreen implements Screen
 
 	//Physics stuff
 	public static World world;
+	private ArrayList<Body> terrainSections;
+
+	//Entity stuff
+
 
 	public PlanetScreen(final game gameObject)
 	{
@@ -60,7 +65,10 @@ public class PlanetScreen implements Screen
 		//Physics
 		world = new World(new Vector2(0, GRAVITY), true);
 		testSprite = game.textureAtlas.createSprite("stone");
+
+		//Terrain setup
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
+		
 
 		//Entities
 		player = new Player(0,0,16,16);
@@ -69,7 +77,7 @@ public class PlanetScreen implements Screen
 	//DRAWING METHODS ----------------------------------------------------------------------
 	private void drawTerrain(SpriteBatch batch)
 	{
-		batch.draw(groundTexture, 0, 0, SECTOR_LENGTH * PIXELS_TO_METERS, 200f, 0, 0, 200, TERRAIN_Y_LEVEL, false, false);
+		batch.draw(groundTexture, 0, screenHeight - TERRAIN_Y_LEVEL, SECTOR_LENGTH * PIXELS_TO_METERS, 200f, 0, 0, 200, TERRAIN_Y_LEVEL, false, false);
 	}
 
 	//INPUT METHODS ------------------------------------------------------------------------
@@ -169,7 +177,7 @@ public class PlanetScreen implements Screen
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 		testSprite.draw(game.batch);
-		//drawTerrain(game.batch);
+		drawTerrain(game.batch);
 		player.update();
 		player.sprite.draw(game.batch);
 		game.batch.end();
