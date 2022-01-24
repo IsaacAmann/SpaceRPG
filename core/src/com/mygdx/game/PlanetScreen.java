@@ -17,31 +17,39 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class PlanetScreen implements Screen
 {
+	//constants
+	private static final int SECTOR_LENGTH = 500;
+	private static final float PIXELS_TO_METERS = 100f;
+
+
+	//Camera and screen variables
 	private static int screenWidth;
-	private static int screenHeight;	
-	private OrthographicCamera camera;	
+	private static int screenHeight;
+	private OrthographicCamera camera;
 	private game game;
 
 	//Set up for map sectors
 	private int numberSectors;
-	private double sectorLength;	
+	private double sectorLength;
 
 	//Sprites and textures
 	private Sprite testSprite;
+	private Texture groundTexture;
+
 
 	public PlanetScreen(final game gameObject)
 	{
 		game = gameObject;
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
-		
+
 		//Camera setup
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, screenWidth, screenHeight);
 		//End Camera setup
-		
+
 		testSprite = game.textureAtlas.createSprite("stone");
-		
+		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
 	}
 
 	@Override
@@ -52,37 +60,37 @@ public class PlanetScreen implements Screen
 		testSprite.draw(game.batch);
 		game.batch.end();
 	}
-	
+
 	@Override
 	public void dispose()
 	{
-	
+
 	}
-	
+
 	@Override
 	public void resize(int width, int height)
 	{
 
 	}
-	
+
 	@Override
 	public void show()
 	{
 
 	}
 
-	@Override 
+	@Override
 	public void hide()
 	{
 
 	}
 
-	@Override 
+	@Override
 	public void pause()
 	{
 
 	}
-	
+
 	@Override
 	public void resume()
 	{
