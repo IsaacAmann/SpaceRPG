@@ -10,8 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class game extends Game {
 	public SpriteBatch batch;
 	public TextureAtlas textureAtlas;
-	
-		
+
+
 	public void create () {
 		textureAtlas = new TextureAtlas("textures.txt");
 		batch = new SpriteBatch();
@@ -21,9 +21,9 @@ public class game extends Game {
 	public void render () {
 		super.render();
 	}
-	
+
 	public void dispose () {
 		batch.dispose();
-		
+
 	}
 }
