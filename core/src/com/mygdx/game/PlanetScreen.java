@@ -22,7 +22,7 @@ public class PlanetScreen implements Screen
 {
 	//constants
 	private static final int SECTOR_LENGTH = 50;
-	private static final float PIXELS_TO_METERS = 100f;
+	public static final float PIXELS_TO_METERS = 100f;
 	private static final float DEFAULT_PLAYER_SPEED = 25f;
 	private static final int TERRAIN_Y_LEVEL = 200;
 	public static final float GRAVITY = 98f;
@@ -33,16 +33,18 @@ public class PlanetScreen implements Screen
 	private OrthographicCamera camera;
 	private game game;
 
+	public static Player player;
+
 	//Set up for map sectors
 	private int numberSectors;
 	private double sectorLength;
 
 	//Sprites and textures
-	public Sprite testSprite;
+	public static Sprite testSprite;
 	public Texture groundTexture;
 
 	//Physics stuff
-	public World world;
+	public static World world;
 
 	public PlanetScreen(final game gameObject)
 	{
@@ -59,6 +61,9 @@ public class PlanetScreen implements Screen
 		world = new World(new Vector2(0, GRAVITY), true);
 		testSprite = game.textureAtlas.createSprite("stone");
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
+
+		//Entities
+		player = new Player(0,0,16,16);
 	}
 
 	//DRAWING METHODS ----------------------------------------------------------------------
@@ -164,7 +169,9 @@ public class PlanetScreen implements Screen
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 		testSprite.draw(game.batch);
-		drawTerrain(game.batch);
+		//drawTerrain(game.batch);
+		player.update();
+		player.sprite.draw(game.batch);
 		game.batch.end();
 	}
 
