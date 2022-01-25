@@ -29,8 +29,8 @@ public class PlanetScreen implements Screen
 	public static final float GRAVITY = 98f;
 
 	//Camera and screen variables
-	private static int screenWidth;
-	private static int screenHeight;
+	public static int screenWidth;
+	public static int screenHeight;
 	private OrthographicCamera camera;
 	private game game;
 
@@ -47,6 +47,7 @@ public class PlanetScreen implements Screen
 	//Physics stuff
 	public static World world;
 	private ArrayList<Body> terrainSections;
+	private TerrainPiece testTerrain;
 
 	//Entity stuff
 
@@ -68,7 +69,7 @@ public class PlanetScreen implements Screen
 
 		//Terrain setup
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
-		
+		testTerrain = new TerrainPiece(groundTexture, 0, screenHeight - TERRAIN_Y_LEVEL, SECTOR_LENGTH * PIXELS_TO_METERS, TERRAIN_Y_LEVEL);
 
 		//Entities
 		player = new Player(0,0,16,16);
@@ -77,7 +78,8 @@ public class PlanetScreen implements Screen
 	//DRAWING METHODS ----------------------------------------------------------------------
 	private void drawTerrain(SpriteBatch batch)
 	{
-		batch.draw(groundTexture, 0, screenHeight - TERRAIN_Y_LEVEL, SECTOR_LENGTH * PIXELS_TO_METERS, 200f, 0, 0, 200, TERRAIN_Y_LEVEL, false, false);
+		//batch.draw(groundTexture, 0, screenHeight - TERRAIN_Y_LEVEL, SECTOR_LENGTH * PIXELS_TO_METERS, 200f, 0, 0, 200, TERRAIN_Y_LEVEL, false, false);
+		testTerrain.draw(batch);
 	}
 
 	//INPUT METHODS ------------------------------------------------------------------------
