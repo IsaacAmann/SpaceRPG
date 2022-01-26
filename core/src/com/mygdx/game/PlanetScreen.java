@@ -26,7 +26,7 @@ public class PlanetScreen implements Screen
 	private static final int SECTOR_LENGTH = 100;
 	public static final float PIXELS_TO_METERS = 100f;
 	private static final float DEFAULT_PLAYER_SPEED = 25f;
-	private static final int TERRAIN_Y_LEVEL = 3;
+	private static final int TERRAIN_Y_LEVEL = 2;
 	public static final float GRAVITY = 1f;
 
 	//Camera and screen variables
@@ -71,10 +71,10 @@ public class PlanetScreen implements Screen
 		debugRenderer = new Box2DDebugRenderer();
 		//Terrain setup
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
-		testTerrain = new TerrainPiece(groundTexture, 0, 2, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
+		testTerrain = new TerrainPiece(groundTexture, 0, screenHeight/PIXELS_TO_METERS, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 
 		//Entities
-		player = new Player(3,0,16,16);
+		player = new Player(2,0,16,16);
 	}
 
 	//DRAWING METHODS ----------------------------------------------------------------------

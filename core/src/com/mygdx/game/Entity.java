@@ -16,6 +16,7 @@ public abstract class Entity
   public Entity(Sprite sprite, int x, int y, int width, int height)
   {
     this.sprite = sprite;
+
     BodyDef bodyDef = new BodyDef();
     bodyDef.type = BodyDef.BodyType.DynamicBody;
     bodyDef.position.set(x, y);
@@ -34,7 +35,7 @@ public abstract class Entity
 
   public void update()
   {
-    this.sprite.setPosition(this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS, this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS);
+    this.sprite.setPosition((this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS)-sprite.getWidth()/2, (this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS)-sprite.getHeight()/2);
 
   }
 }

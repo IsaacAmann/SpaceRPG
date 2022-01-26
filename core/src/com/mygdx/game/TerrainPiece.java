@@ -32,7 +32,8 @@ public class TerrainPiece
     FixtureDef fixtureDef = new FixtureDef();
 
     EdgeShape edgeShape = new EdgeShape();
-    edgeShape.set(x, y, x + width, y);
+    edgeShape.set(-width/2, -height/2, width/2, -height/2);
+    //edgeShape.set()
     fixtureDef.shape = edgeShape;
 
     body = PlanetScreen.world.createBody(bodyDef);
@@ -45,7 +46,9 @@ public class TerrainPiece
   {
     //batch.draw(groundTexture, 0, screenHeight - TERRAIN_Y_LEVEL, SECTOR_LENGTH * PIXELS_TO_METERS, 200f, 0, 0, 200, TERRAIN_Y_LEVEL, false, false);
     //batch.draw(texture, x/PlanetScreen.PIXELS_TO_METERS, y/PlanetScreen.PIXELS_TO_METERS, width, height, 0, 0, 256, 256, false, false);
-    batch.draw(texture, body.getPosition().x*PIXELS_TO_METERS, (body.getPosition().y)*PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS, 0, 0, 256, 256, false, false);
+    //batch.draw(texture, body.getPosition().x*PIXELS_TO_METERS, (body.getPosition().y)*PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS, 0, 0, 256, 256, false, false);
+    //batch.draw(texture, body.getPosition().x*PIXELS_TO_METERS, (body.getPosition().y)*PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS);
+    batch.draw(texture, (x - width/2)*PIXELS_TO_METERS, (y - height/2)*PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS);
 
   }
 
