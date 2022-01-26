@@ -27,7 +27,7 @@ public class PlanetScreen implements Screen
 	public static final float PIXELS_TO_METERS = 100f;
 	private static final float DEFAULT_PLAYER_SPEED = 25f;
 	private static final int TERRAIN_Y_LEVEL = 2;
-	public static final float GRAVITY = 1f;
+	public static final float GRAVITY = 9.8f;
 
 	//Camera and screen variables
 	public static int screenWidth;
@@ -35,6 +35,7 @@ public class PlanetScreen implements Screen
 	private OrthographicCamera camera;
 	private game game;
 	private Matrix4 debugMatrix;
+	public Vector3 playerPositionChange;
 
 	public static Player player;
 
@@ -63,6 +64,7 @@ public class PlanetScreen implements Screen
 		//Camera setup
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, screenWidth, screenHeight);
+		playerPositionChange = new Vector3(0,0,0);
 		//End Camera setup
 
 		//Physics
@@ -75,6 +77,34 @@ public class PlanetScreen implements Screen
 
 		//Entities
 		player = new Player(2,0,16,16);
+
+		//Contact Listener
+		world.setContactListener(new ContactListener()
+		{
+			@Override
+			public void beginContact(Contact contact)
+			{
+				System.out.println("Contact");
+				if(contact.getFixtureA().getBody() == player.body || contact.getFixtureB().getBody() == player.body)
+				{
+					player.canJump = true;
+				}
+			}
+			@Override
+      public void endContact(Contact contact)
+			{
+      }
+
+      @Override
+      public void preSolve(Contact contact, Manifold oldManifold)
+			{
+      }
+
+      @Override
+      public void postSolve(Contact contact, ContactImpulse impulse)
+			{
+      }
+		});
 	}
 
 	//DRAWING METHODS ----------------------------------------------------------------------
@@ -85,7 +115,7 @@ public class PlanetScreen implements Screen
 	}
 
 	//INPUT METHODS ------------------------------------------------------------------------
-	static class playerInput
+	public static class playerInput
 	{
 		static boolean up = false;
 		static boolean down = false;
@@ -145,12 +175,13 @@ public class PlanetScreen implements Screen
 	private void gameLoop()
 	{
 		manageInput();
-		manageCamera();
+
 
 	}
 
 	private void manageCamera()
 	{
+		/*
 		if(playerInput.right)
 		{
 			camera.translate(DEFAULT_PLAYER_SPEED, 0);
@@ -167,17 +198,21 @@ public class PlanetScreen implements Screen
 		{
 			camera.translate(0, DEFAULT_PLAYER_SPEED);
 		}
+		*/
+		camera.position.set(player.body.getPosition().x*PIXELS_TO_METERS,player.body.getPosition().y*PIXELS_TO_METERS,0);
 		System.out.println("camera x: " + camera.position.x + "camera y: " + camera.position.y);
 		camera.update();
 	}
 
+
 	@Override
 	public void render(float delta)
 	{
+
 		gameLoop();
 		world.step(Gdx.graphics.getDeltaTime(), 6, 2);
 		ScreenUtils.clear(0, 0, 0, 1);
-
+		manageCamera();
 		game.batch.setProjectionMatrix(camera.combined);
 		debugMatrix = game.batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);
 
