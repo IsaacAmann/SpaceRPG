@@ -26,7 +26,7 @@ public class PlanetScreen implements Screen
 	private static final int SECTOR_LENGTH = 100;
 	public static final float PIXELS_TO_METERS = 100f;
 	private static final float DEFAULT_PLAYER_SPEED = 25f;
-	private static final int TERRAIN_Y_LEVEL = 2;
+	private static final int TERRAIN_Y_LEVEL = 6;
 	public static final float GRAVITY = 9.8f;
 
 	//Camera and screen variables
@@ -36,6 +36,8 @@ public class PlanetScreen implements Screen
 	private game game;
 	private Matrix4 debugMatrix;
 	public Vector3 playerPositionChange;
+	public Vector2 backgroundPosition1;
+	public Vector2 backgroundPosition2;
 
 	public static Player player;
 
@@ -47,6 +49,8 @@ public class PlanetScreen implements Screen
 	public static Sprite testSprite;
 	public static Sprite playerSprite;
 	public Texture groundTexture;
+	public Texture backgroundTexture;
+
 
 	//Physics stuff
 	public static World world;
@@ -65,6 +69,8 @@ public class PlanetScreen implements Screen
 		testSprite = game.textureAtlas.createSprite("stone");
 		playerSprite = game.textureAtlas.createSprite("player");
 		playerSprite.flip(false,true);
+		backgroundTexture = new Texture(Gdx.files.internal("planet1Background.png"));
+
 		//Camera setup
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, screenWidth, screenHeight);
@@ -75,12 +81,17 @@ public class PlanetScreen implements Screen
 		world = new World(new Vector2(0, GRAVITY), true);
 		testSprite = game.textureAtlas.createSprite("stone");
 		debugRenderer = new Box2DDebugRenderer();
+
 		//Terrain setup
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
 		testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 
 		//Entities
 		player = new Player(2,0,20,30);
+
+		//Background
+		backgroundPosition1 = new Vector2(0, -screenHeight);
+		backgroundPosition2 = new Vector2(-screenWidth, -screenHeight);
 
 		//Contact Listener
 		world.setContactListener(new ContactListener()
@@ -116,6 +127,25 @@ public class PlanetScreen implements Screen
 	{
 		//batch.draw(groundTexture, 0, screenHeight - TERRAIN_Y_LEVEL, SECTOR_LENGTH * PIXELS_TO_METERS, 200f, 0, 0, 200, TERRAIN_Y_LEVEL, false, false);
 		testTerrain.draw(batch);
+	}
+	private void drawBackground(SpriteBatch batch)
+	{
+		checkBackground(backgroundPosition1);
+		checkBackground(backgroundPosition2);
+		batch.draw(backgroundTexture, backgroundPosition1.x, backgroundPosition1.y, screenWidth, screenHeight);
+		batch.draw(backgroundTexture, backgroundPosition2.x, backgroundPosition2.y, screenWidth, screenHeight);
+	}
+	private void checkBackground(Vector2 position)
+	{
+		float playerPosition = player.body.getPosition().x * PIXELS_TO_METERS;
+		if(position.x - playerPosition < -screenWidth*1.5)
+		{
+			position.x += screenWidth*2;
+		}
+		if(playerPosition - position.x < -screenWidth*.5)
+		{
+			position.x -= screenWidth*2;
+		}
 	}
 
 	//INPUT METHODS ------------------------------------------------------------------------
@@ -203,7 +233,7 @@ public class PlanetScreen implements Screen
 			camera.translate(0, DEFAULT_PLAYER_SPEED);
 		}
 		*/
-		camera.position.set(player.body.getPosition().x*PIXELS_TO_METERS,player.body.getPosition().y*PIXELS_TO_METERS,0);
+		camera.position.set(player.body.getPosition().x*PIXELS_TO_METERS,player.body.getPosition().y*PIXELS_TO_METERS - 150,0);
 		System.out.println("camera x: " + camera.position.x + "camera y: " + camera.position.y);
 		camera.update();
 	}
@@ -223,6 +253,7 @@ public class PlanetScreen implements Screen
 		game.batch.begin();
 			//testSprite.draw(game.batch);
 			drawTerrain(game.batch);
+			drawBackground(game.batch);
 			player.update();
 			player.sprite.draw(game.batch);
 		game.batch.end();
