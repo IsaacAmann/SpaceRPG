@@ -28,6 +28,7 @@ public abstract class Entity
     fixtureDef.density = 1f;
 
     body = PlanetScreen.world.createBody(bodyDef);
+    body.createFixture(fixtureDef);
     shape.dispose();
   }
 

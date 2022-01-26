@@ -17,22 +17,24 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Matrix4;
 import java.util.ArrayList;
 
 public class PlanetScreen implements Screen
 {
 	//constants
-	private static final int SECTOR_LENGTH = 50;
+	private static final int SECTOR_LENGTH = 100;
 	public static final float PIXELS_TO_METERS = 100f;
 	private static final float DEFAULT_PLAYER_SPEED = 25f;
-	private static final int TERRAIN_Y_LEVEL = 200;
-	public static final float GRAVITY = 98f;
+	private static final int TERRAIN_Y_LEVEL = 3;
+	public static final float GRAVITY = 1f;
 
 	//Camera and screen variables
 	public static int screenWidth;
 	public static int screenHeight;
 	private OrthographicCamera camera;
 	private game game;
+	private Matrix4 debugMatrix;
 
 	public static Player player;
 
@@ -48,7 +50,7 @@ public class PlanetScreen implements Screen
 	public static World world;
 	private ArrayList<Body> terrainSections;
 	private TerrainPiece testTerrain;
-
+	private Box2DDebugRenderer debugRenderer;
 	//Entity stuff
 
 
@@ -66,13 +68,13 @@ public class PlanetScreen implements Screen
 		//Physics
 		world = new World(new Vector2(0, GRAVITY), true);
 		testSprite = game.textureAtlas.createSprite("stone");
-
+		debugRenderer = new Box2DDebugRenderer();
 		//Terrain setup
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
-		testTerrain = new TerrainPiece(groundTexture, 0, screenHeight - TERRAIN_Y_LEVEL, SECTOR_LENGTH * PIXELS_TO_METERS, TERRAIN_Y_LEVEL);
+		testTerrain = new TerrainPiece(groundTexture, 0, 2, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 
 		//Entities
-		player = new Player(0,0,16,16);
+		player = new Player(3,0,16,16);
 	}
 
 	//DRAWING METHODS ----------------------------------------------------------------------
@@ -177,12 +179,16 @@ public class PlanetScreen implements Screen
 		ScreenUtils.clear(0, 0, 0, 1);
 
 		game.batch.setProjectionMatrix(camera.combined);
+		debugMatrix = game.batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);
+
 		game.batch.begin();
-		testSprite.draw(game.batch);
-		drawTerrain(game.batch);
-		player.update();
-		player.sprite.draw(game.batch);
+			//testSprite.draw(game.batch);
+			drawTerrain(game.batch);
+			player.update();
+			player.sprite.draw(game.batch);
 		game.batch.end();
+
+		debugRenderer.render(world, debugMatrix);
 	}
 
 	@Override

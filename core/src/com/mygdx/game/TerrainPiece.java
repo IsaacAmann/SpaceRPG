@@ -10,14 +10,15 @@ import com.badlogic.gdx.math.Vector2;
 
 public class TerrainPiece
 {
+  private static final float PIXELS_TO_METERS = PlanetScreen.PIXELS_TO_METERS;
   private Texture texture;
   public Body body;
-  public int x;
-  public int y;
+  public float x;
+  public float y;
   public float width;
   public float height;
 
-  public TerrainPiece(Texture texture, int x, int y, float width, float height)
+  public TerrainPiece(Texture texture, float x, float y, float width, float height)
   {
     this.x = x;
     this.y = y;
@@ -43,7 +44,8 @@ public class TerrainPiece
   public void draw(SpriteBatch batch)
   {
     //batch.draw(groundTexture, 0, screenHeight - TERRAIN_Y_LEVEL, SECTOR_LENGTH * PIXELS_TO_METERS, 200f, 0, 0, 200, TERRAIN_Y_LEVEL, false, false);
-    batch.draw(texture, x, y, width, height, 0, 0, 256, 256, false, false);
+    //batch.draw(texture, x/PlanetScreen.PIXELS_TO_METERS, y/PlanetScreen.PIXELS_TO_METERS, width, height, 0, 0, 256, 256, false, false);
+    batch.draw(texture, body.getPosition().x*PIXELS_TO_METERS, (body.getPosition().y)*PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS, 0, 0, 256, 256, false, false);
 
   }
 
