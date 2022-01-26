@@ -45,6 +45,7 @@ public class PlanetScreen implements Screen
 
 	//Sprites and textures
 	public static Sprite testSprite;
+	public static Sprite playerSprite;
 	public Texture groundTexture;
 
 	//Physics stuff
@@ -60,7 +61,10 @@ public class PlanetScreen implements Screen
 		game = gameObject;
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
-
+		//Textures and Sprites
+		testSprite = game.textureAtlas.createSprite("stone");
+		playerSprite = game.textureAtlas.createSprite("player");
+		playerSprite.flip(false,true);
 		//Camera setup
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, screenWidth, screenHeight);
@@ -73,10 +77,10 @@ public class PlanetScreen implements Screen
 		debugRenderer = new Box2DDebugRenderer();
 		//Terrain setup
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
-		testTerrain = new TerrainPiece(groundTexture, 0, screenHeight/PIXELS_TO_METERS, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
+		testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 
 		//Entities
-		player = new Player(2,0,16,16);
+		player = new Player(2,0,20,30);
 
 		//Contact Listener
 		world.setContactListener(new ContactListener()
@@ -211,7 +215,7 @@ public class PlanetScreen implements Screen
 
 		gameLoop();
 		world.step(Gdx.graphics.getDeltaTime(), 6, 2);
-		ScreenUtils.clear(0, 0, 0, 1);
+		ScreenUtils.clear(0, 0, .5f, 0);
 		manageCamera();
 		game.batch.setProjectionMatrix(camera.combined);
 		debugMatrix = game.batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);

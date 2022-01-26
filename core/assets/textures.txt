@@ -1,5 +1,5 @@
 textures.png
-size: 272, 256
+size: 256, 286
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -10,9 +10,16 @@ groundStone
   orig: 256, 256
   offset: 0, 0
   index: -1
+player
+  rotate: false
+  xy: 0, 256
+  size: 20, 30
+  orig: 20, 30
+  offset: 0, 0
+  index: -1
 stone
   rotate: false
-  xy: 256, 0
+  xy: 20, 256
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

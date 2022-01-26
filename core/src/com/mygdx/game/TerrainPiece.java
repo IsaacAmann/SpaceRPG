@@ -32,7 +32,7 @@ public class TerrainPiece
     FixtureDef fixtureDef = new FixtureDef();
 
     EdgeShape edgeShape = new EdgeShape();
-    edgeShape.set(-width/2, -height/2, width/2, -height/2);
+    edgeShape.set(-width/2, y, width/2, y);
     //edgeShape.set()
     fixtureDef.shape = edgeShape;
 
@@ -48,7 +48,7 @@ public class TerrainPiece
     //batch.draw(texture, x/PlanetScreen.PIXELS_TO_METERS, y/PlanetScreen.PIXELS_TO_METERS, width, height, 0, 0, 256, 256, false, false);
     //batch.draw(texture, body.getPosition().x*PIXELS_TO_METERS, (body.getPosition().y)*PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS, 0, 0, 256, 256, false, false);
     //batch.draw(texture, body.getPosition().x*PIXELS_TO_METERS, (body.getPosition().y)*PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS);
-    batch.draw(texture, (x - width/2)*PIXELS_TO_METERS, (y - height/2)*PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS);
+    batch.draw(texture, (x - width/2)*PIXELS_TO_METERS, y * PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS);
 
   }
 
