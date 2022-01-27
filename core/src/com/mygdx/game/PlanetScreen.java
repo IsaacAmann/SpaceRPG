@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class PlanetScreen implements Screen
 {
 	//constants
-	private static final int SECTOR_LENGTH = 100;
+	private static final int SECTOR_LENGTH = 40;
 	public static final float PIXELS_TO_METERS = 100f;
 	private static final float DEFAULT_PLAYER_SPEED = 25f;
 	private static final int TERRAIN_Y_LEVEL = 6;
@@ -38,8 +38,11 @@ public class PlanetScreen implements Screen
 	public Vector3 playerPositionChange;
 	public Vector2 backgroundPosition1;
 	public Vector2 backgroundPosition2;
+	//seperate camera for drawing hud elements directly to screen
+	private OrthographicCamera hudCamera;
 
 	public static Player player;
+	public PlanetHUD planetHUD;
 
 	//Set up for map sectors
 	private int numberSectors;
@@ -50,6 +53,7 @@ public class PlanetScreen implements Screen
 	public static Sprite playerSprite;
 	public Texture groundTexture;
 	public Texture backgroundTexture;
+	public Texture hudTexture;
 
 
 	//Physics stuff
@@ -70,10 +74,12 @@ public class PlanetScreen implements Screen
 		playerSprite = game.textureAtlas.createSprite("player");
 		playerSprite.flip(false,true);
 		backgroundTexture = new Texture(Gdx.files.internal("planet1Background.png"));
-
+		hudTexture = new Texture(Gdx.files.internal("planetHUDTexture.png"));
 		//Camera setup
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, screenWidth, screenHeight);
+		hudCamera = new OrthographicCamera();
+		hudCamera.setToOrtho(false, screenWidth, screenHeight);
 		playerPositionChange = new Vector3(0,0,0);
 		//End Camera setup
 
@@ -92,6 +98,9 @@ public class PlanetScreen implements Screen
 		//Background
 		backgroundPosition1 = new Vector2(0, -screenHeight);
 		backgroundPosition2 = new Vector2(-screenWidth, -screenHeight);
+
+		//HUD setup
+		planetHUD = new PlanetHUD(hudTexture);
 
 		//Contact Listener
 		world.setContactListener(new ContactListener()
@@ -242,7 +251,6 @@ public class PlanetScreen implements Screen
 	@Override
 	public void render(float delta)
 	{
-
 		gameLoop();
 		world.step(Gdx.graphics.getDeltaTime(), 6, 2);
 		ScreenUtils.clear(0, 0, .5f, 0);
@@ -257,8 +265,14 @@ public class PlanetScreen implements Screen
 			player.update();
 			player.sprite.draw(game.batch);
 		game.batch.end();
-
 		debugRenderer.render(world, debugMatrix);
+		//HUD render calls
+		game.batch.setProjectionMatrix(hudCamera.combined);
+		game.batch.begin();
+			//game.batch.draw(groundTexture, 0, 0, 200, 44);
+			planetHUD.draw(game.batch);
+		game.batch.end();
+
 	}
 
 	@Override
