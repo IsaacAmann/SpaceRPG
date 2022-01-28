@@ -218,7 +218,7 @@ public class PlanetScreen implements Screen
 	private void gameLoop()
 	{
 		manageInput();
-
+		player.update();
 
 	}
 
@@ -262,8 +262,7 @@ public class PlanetScreen implements Screen
 			//testSprite.draw(game.batch);
 			drawTerrain(game.batch);
 			drawBackground(game.batch);
-			player.update();
-			player.sprite.draw(game.batch);
+			player.draw(game.batch);
 		game.batch.end();
 		debugRenderer.render(world, debugMatrix);
 		//HUD render calls

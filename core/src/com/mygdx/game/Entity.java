@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import java.lang.Math;
 
 public abstract class Entity
 {
   public Body body;
   public Sprite sprite;
+  public static final float RADIANS_TO_DEGREES = (180 / (float) Math.PI);
 
   public Entity(Sprite sprite, int x, int y, int width, int height)
   {
@@ -35,7 +37,12 @@ public abstract class Entity
 
   public void update()
   {
-    this.sprite.setPosition((this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS)-sprite.getWidth()/2, (this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS)-sprite.getHeight()/2);
 
+  }
+  public void draw(SpriteBatch batch)
+  {
+    this.sprite.setPosition((this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS)-sprite.getWidth()/2, (this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS)-sprite.getHeight()/2);
+    this.sprite.setRotation(this.body.getAngle() * RADIANS_TO_DEGREES);
+    this.sprite.draw(batch);
   }
 }
