@@ -1,32 +1,67 @@
 textures.png
-size: 1658, 768
+size: 1740, 768
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-groundStone
+defaultHumanoidArm
   rotate: false
   xy: 0, 0
+  size: 10, 20
+  orig: 10, 20
+  offset: 0, 0
+  index: -1
+defaultHumanoidBody
+  rotate: false
+  xy: 10, 0
+  size: 25, 40
+  orig: 25, 40
+  offset: 0, 0
+  index: -1
+defaultHumanoidForearm
+  rotate: false
+  xy: 35, 0
+  size: 10, 20
+  orig: 10, 20
+  offset: 0, 0
+  index: -1
+defaultHumanoidHead
+  rotate: false
+  xy: 45, 0
+  size: 27, 27
+  orig: 27, 27
+  offset: 0, 0
+  index: -1
+defaultHumanoidLeg
+  rotate: false
+  xy: 72, 0
+  size: 10, 40
+  orig: 10, 40
+  offset: 0, 0
+  index: -1
+groundStone
+  rotate: false
+  xy: 82, 0
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 planet1Background
   rotate: false
-  xy: 256, 0
+  xy: 338, 0
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0
   index: -1
 player
   rotate: false
-  xy: 1622, 0
+  xy: 1704, 0
   size: 20, 30
   orig: 20, 30
   offset: 0, 0
   index: -1
 stone
   rotate: false
-  xy: 1642, 0
+  xy: 1724, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

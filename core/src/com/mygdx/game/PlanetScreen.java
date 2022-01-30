@@ -42,6 +42,7 @@ public class PlanetScreen implements Screen
 	private OrthographicCamera hudCamera;
 
 	public static Player player;
+	public Humanoid testHumanoid;
 	public PlanetHUD planetHUD;
 
 	//Set up for map sectors
@@ -50,10 +51,16 @@ public class PlanetScreen implements Screen
 
 	//Sprites and textures
 	public static Sprite testSprite;
-	public static Sprite playerSprite;
+	public Sprite playerSprite;
 	public Texture groundTexture;
 	public Texture backgroundTexture;
 	public Texture hudTexture;
+	//Default humanoid Sprites
+	public Sprite defaultHumanoidHead;
+	public Sprite defaultHumanoidBody;
+	public Sprite defaultHumanoidLeg;
+	public Sprite defaultHumanoidArm;
+	public Sprite defaultHumanoidForearm;
 
 
 	//Physics stuff
@@ -75,6 +82,18 @@ public class PlanetScreen implements Screen
 		playerSprite.flip(false,true);
 		backgroundTexture = new Texture(Gdx.files.internal("planet1Background.png"));
 		hudTexture = new Texture(Gdx.files.internal("planetHUDTexture.png"));
+		//default humanoid sprites
+		defaultHumanoidHead = game.textureAtlas.createSprite("defaultHumanoidHead");
+		defaultHumanoidBody = game.textureAtlas.createSprite("defaultHumanoidBody");
+		defaultHumanoidArm = game.textureAtlas.createSprite("defaultHumanoidArm");
+		defaultHumanoidForearm = game.textureAtlas.createSprite("defaultHumanoidForearm");
+		defaultHumanoidLeg = game.textureAtlas.createSprite("defaultHumanoidLeg");
+
+		defaultHumanoidHead.flip(false,true);
+		defaultHumanoidBody.flip(false,true);
+		defaultHumanoidArm.flip(false,true);
+		defaultHumanoidForearm.flip(false,true);
+		defaultHumanoidLeg.flip(false,true);
 		//Camera setup
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, screenWidth, screenHeight);
@@ -93,7 +112,8 @@ public class PlanetScreen implements Screen
 		testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 
 		//Entities
-		player = new Player(2,0,20,30);
+		player = new Player(playerSprite, 2,0,25,80);
+		testHumanoid = new Humanoid(defaultHumanoidBody, defaultHumanoidArm, defaultHumanoidForearm, defaultHumanoidLeg, defaultHumanoidHead, 3, 0, 25, 80);
 
 		//Background
 		backgroundPosition1 = new Vector2(0, -screenHeight);
@@ -263,6 +283,7 @@ public class PlanetScreen implements Screen
 			drawTerrain(game.batch);
 			drawBackground(game.batch);
 			player.draw(game.batch);
+			testHumanoid.draw(game.batch);
 		game.batch.end();
 		debugRenderer.render(world, debugMatrix);
 		//HUD render calls

@@ -17,7 +17,8 @@ public abstract class Entity
 
   public Entity(Sprite sprite, int x, int y, int width, int height)
   {
-    this.sprite = sprite;
+    this.sprite = new Sprite();
+    this.sprite.set(sprite);
 
     BodyDef bodyDef = new BodyDef();
     bodyDef.type = BodyDef.BodyType.DynamicBody;

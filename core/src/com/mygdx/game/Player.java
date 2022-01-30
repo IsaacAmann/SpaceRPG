@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Player extends Entity
 {
@@ -10,9 +11,9 @@ public class Player extends Entity
 
   public static boolean canJump = false;
 
-  public Player(int x, int y, int width, int height)
+  public Player(Sprite sprite, int x, int y, int width, int height)
   {
-    super(PlanetScreen.playerSprite, x, y, width, height);
+    super(sprite, x, y, width, height);
   }
 
   @Override

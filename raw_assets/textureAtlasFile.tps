@@ -185,6 +185,67 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">defaultHumanoidArm.png</key>
+            <key type="filename">defaultHumanoidForearm.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,5,5,10</rect>
+                <key>scale9Paddings</key>
+                <rect>3,5,5,10</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">defaultHumanoidBody.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>6,10,13,20</rect>
+                <key>scale9Paddings</key>
+                <rect>6,10,13,20</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">defaultHumanoidHead.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>7,7,13,13</rect>
+                <key>scale9Paddings</key>
+                <rect>7,7,13,13</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">defaultHumanoidLeg.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,10,5,20</rect>
+                <key>scale9Paddings</key>
+                <rect>3,10,5,20</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">groundStone.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -252,6 +313,11 @@
             <filename>groundStone.png</filename>
             <filename>player.png</filename>
             <filename>planet1Background.png</filename>
+            <filename>defaultHumanoidBody.png</filename>
+            <filename>defaultHumanoidHead.png</filename>
+            <filename>defaultHumanoidLeg.png</filename>
+            <filename>defaultHumanoidArm.png</filename>
+            <filename>defaultHumanoidForearm.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
