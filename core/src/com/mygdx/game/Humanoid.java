@@ -74,30 +74,40 @@ public class Humanoid extends Entity
   @Override
   public void draw(SpriteBatch batch)
   {
-    this.sprite.setPosition((this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS)-sprite.getWidth()/2, ((this.body.getPosition().y)* PlanetScreen.PIXELS_TO_METERS - (this.height/4))-sprite.getHeight()/2);
+    //this.sprite.setPosition((this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS)-sprite.getWidth()/2, (this.body.getPosition().y)* PlanetScreen.PIXELS_TO_METERS - sprite.getHeight()/2);
+    this.sprite.setPosition((this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS)-sprite.getWidth()/2, (this.body.getPosition().y)* PlanetScreen.PIXELS_TO_METERS - sprite.getHeight());
     this.sprite.setRotation(this.body.getAngle() * RADIANS_TO_DEGREES);
     this.sprite.draw(batch);
     //Offsets for limb positions
-    float headYOffset = -(this.sprite.getHeight());
+    float headYOffset = -(this.sprite.getHeight() - headSprite.getHeight()/2);
     float legYOffset = (this.sprite.getHeight());
-    float legXOffset = (this.sprite.getWidth()/2);
+    float legXOffset = (this.sprite.getWidth()/2 - rightLegSprite.getWidth()/2);
+    float armXOffset = (this.sprite.getWidth()/2 - rightArmSprite.getWidth()/2);
+    float armYOffset = (this.sprite.getHeight()/2);
+
     //Setting origins of limbs for rotation
 
 
 
     //Position limb sprites
-    rightArmSprite.setPosition(this.sprite.getX(), this.sprite.getY());
-    leftArmSprite.setPosition(this.sprite.getX(), this.sprite.getY());
+    rightArmSprite.setPosition(this.sprite.getX() + armXOffset , this.sprite.getY());
+    leftArmSprite.setPosition(this.sprite.getX() + armXOffset, this.sprite.getY());
     rightLegSprite.setPosition(this.sprite.getX() + legXOffset, this.sprite.getY() + legYOffset);
     leftLegSprite.setPosition(this.sprite.getX() + legXOffset, this.sprite.getY() + legYOffset);
     headSprite.setPosition(this.sprite.getX(), this.sprite.getY() + headYOffset);
-    rightForearmSprite.setPosition(this.sprite.getX(), this.sprite.getY());
-    leftForearmSprite.setPosition(this.sprite.getX(), this.sprite.getY());
+    rightForearmSprite.setPosition(rightArmSprite.getX(), rightArmSprite.getY() + rightArmSprite.getHeight());
+    leftForearmSprite.setPosition(leftArmSprite.getX(), leftArmSprite.getY() + leftArmSprite.getHeight());
 
-    headSprite.setOrigin(headSprite.getWidth()/2, this.sprite.getHeight());
-    rightArmSprite.setOrigin(rightArmSprite.getWidth()/2, -rightArmSprite.getHeight());
-
-    //Set rotation of limb sprites
+    //Setting origins for rotation relative to body rotation
+    sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight());
+    headSprite.setOrigin(headSprite.getWidth()/2, this.sprite.getHeight() + headSprite.getHeight());
+    rightArmSprite.setOrigin(rightArmSprite.getWidth()/2, rightArmSprite.getHeight()*2);
+    leftArmSprite.setOrigin(leftArmSprite.getWidth()/2, leftArmSprite.getHeight()*2);
+    rightForearmSprite.setOrigin(rightForearmSprite.getWidth()/2, rightForearmSprite.getHeight());
+    leftForearmSprite.setOrigin(leftForearmSprite.getWidth()/2, leftForearmSprite.getHeight());
+    rightLegSprite.setOrigin(rightLegSprite.getWidth()/2, -sprite.getHeight()/2);
+    leftLegSprite.setOrigin(leftLegSprite.getWidth()/2, -sprite.getHeight()/2);
+    //Set rotation of limb sprites relative to body
     rightArmSprite.setRotation(this.body.getAngle() * RADIANS_TO_DEGREES);
     leftArmSprite.setRotation(this.body.getAngle() * RADIANS_TO_DEGREES);
     rightLegSprite.setRotation(this.body.getAngle() * RADIANS_TO_DEGREES);
