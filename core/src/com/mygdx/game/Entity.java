@@ -14,12 +14,16 @@ public abstract class Entity
   public Body body;
   public Sprite sprite;
   public static final float RADIANS_TO_DEGREES = (180 / (float) Math.PI);
+  public float width;
+  public float height;
 
   public Entity(Sprite sprite, int x, int y, int width, int height)
   {
     this.sprite = new Sprite();
     this.sprite.set(sprite);
-
+    this.width = width;
+    this.height = height;
+    
     BodyDef bodyDef = new BodyDef();
     bodyDef.type = BodyDef.BodyType.DynamicBody;
     bodyDef.position.set(x, y);

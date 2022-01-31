@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Player extends Entity
 {
-  private static float JUMP_FORCE = 10f;
+  private static float JUMP_FORCE = 25f;
   private static float WALK_FORCE = 1f;
   private static float WALK_SPEED = 5f;
 

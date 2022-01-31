@@ -60,6 +60,9 @@ public class Humanoid extends Entity
     leftLegSprite.set(legSprite);
     leftForearmSprite.set(forearmSprite);
     rightForearmSprite.set(forearmSprite);
+    //Setting origins of sprites for rotation
+
+
   }
 
   @Override
@@ -71,15 +74,28 @@ public class Humanoid extends Entity
   @Override
   public void draw(SpriteBatch batch)
   {
-    super.draw(batch);
+    this.sprite.setPosition((this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS)-sprite.getWidth()/2, ((this.body.getPosition().y)* PlanetScreen.PIXELS_TO_METERS - (this.height/4))-sprite.getHeight()/2);
+    this.sprite.setRotation(this.body.getAngle() * RADIANS_TO_DEGREES);
+    this.sprite.draw(batch);
+    //Offsets for limb positions
+    float headYOffset = -(this.sprite.getHeight());
+    float legYOffset = (this.sprite.getHeight());
+    float legXOffset = (this.sprite.getWidth()/2);
+    //Setting origins of limbs for rotation
+
+
+
     //Position limb sprites
     rightArmSprite.setPosition(this.sprite.getX(), this.sprite.getY());
     leftArmSprite.setPosition(this.sprite.getX(), this.sprite.getY());
-    rightLegSprite.setPosition(this.sprite.getX(), this.sprite.getY());
-    leftLegSprite.setPosition(this.sprite.getX(), this.sprite.getY());
-    headSprite.setPosition(this.sprite.getX(), this.sprite.getY() - this.sprite.getHeight()/2 - 1);
+    rightLegSprite.setPosition(this.sprite.getX() + legXOffset, this.sprite.getY() + legYOffset);
+    leftLegSprite.setPosition(this.sprite.getX() + legXOffset, this.sprite.getY() + legYOffset);
+    headSprite.setPosition(this.sprite.getX(), this.sprite.getY() + headYOffset);
     rightForearmSprite.setPosition(this.sprite.getX(), this.sprite.getY());
     leftForearmSprite.setPosition(this.sprite.getX(), this.sprite.getY());
+
+    headSprite.setOrigin(headSprite.getWidth()/2, this.sprite.getHeight());
+    rightArmSprite.setOrigin(rightArmSprite.getWidth()/2, -rightArmSprite.getHeight());
 
     //Set rotation of limb sprites
     rightArmSprite.setRotation(this.body.getAngle() * RADIANS_TO_DEGREES);
