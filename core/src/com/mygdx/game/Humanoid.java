@@ -73,11 +73,13 @@ public class Humanoid extends Entity
     legXOffset = (this.sprite.getWidth()/2 - rightLegSprite.getWidth()/2);
 
     armXOffset = (this.sprite.getWidth()/2 - rightArmSprite.getWidth()/2);
-    armYOffset = (this.sprite.getHeight()/2);
-
+    //armYOffset = (this.sprite.getHeight()/2);
+    armYOffset = 0;
     //Initial position of Limbs
-    Vector2 bodyPosition = this.body.getPosition();
-    //rightArmSprite.setPosition(bodyPosition.x + armXOffset, bodyPosition.y - armYOffset);
+    Vector2 bodyPosition = new Vector2();
+    bodyPosition.x = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS;
+    bodyPosition.y = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS;
+    rightArmSprite.setPosition(bodyPosition.x + armXOffset, bodyPosition.y - armYOffset);
 
   }
 
@@ -109,7 +111,7 @@ public class Humanoid extends Entity
 
     float currentX = bodyX + armXOffset;
     float currentY = bodyY + armYOffset;
-    rightArmSprite.setPosition(rotateAboutPoint(rightArmSprite.getX(), rightArmSprite.getY(), bodyX, bodyY - armYOffset, bodyAngle).x, rotateAboutPoint(rightArmSprite.getX(), rightArmSprite.getY(), bodyX, bodyY - armYOffset, bodyAngle).y);
+    //rightArmSprite.setPosition(rotateAboutPoint(rightArmSprite.getX(), rightArmSprite.getY(), bodyX, bodyY - armYOffset, bodyAngle).x, rotateAboutPoint(rightArmSprite.getX(), rightArmSprite.getY(), bodyX, bodyY - armYOffset, bodyAngle).y);
 
     leftArmSprite.setPosition(this.sprite.getX() + armXOffset, this.sprite.getY());
     rightLegSprite.setPosition(this.sprite.getX() + legXOffset, this.sprite.getY() + legYOffset);
