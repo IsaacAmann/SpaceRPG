@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import java.lang.Math;
-
+//comment
 public class Humanoid extends Entity
 {
   /*Extension of entity class that simulates a humanoid with four limbs
