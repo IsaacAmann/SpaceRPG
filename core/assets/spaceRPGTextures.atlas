@@ -6,49 +6,56 @@ filter: Nearest, Nearest
 repeat: none
 defaultHumanoidArm
   rotate: false
-  xy: 289, 312
+  xy: 2, 2
   size: 10, 20
   orig: 10, 20
   offset: 0, 0
   index: -1
 defaultHumanoidBody
   rotate: false
-  xy: 2, 34
+  xy: 260, 351
   size: 25, 40
   orig: 25, 40
   offset: 0, 0
   index: -1
 defaultHumanoidForearm
   rotate: false
-  xy: 260, 283
+  xy: 287, 371
   size: 10, 20
   orig: 10, 20
   offset: 0, 0
   index: -1
 defaultHumanoidHead
   rotate: false
-  xy: 260, 305
+  xy: 2, 24
   size: 27, 27
   orig: 27, 27
   offset: 0, 0
   index: -1
 defaultHumanoidLeg
   rotate: false
-  xy: 29, 34
+  xy: 260, 309
   size: 10, 40
   orig: 10, 40
   offset: 0, 0
   index: -1
+defaultHumanoidStanding1
+  rotate: false
+  xy: 2, 53
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
 groundStone
   rotate: false
-  xy: 2, 76
+  xy: 2, 135
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 player
   rotate: false
-  xy: 2, 2
+  xy: 54, 103
   size: 20, 30
   orig: 20, 30
   offset: 0, 0

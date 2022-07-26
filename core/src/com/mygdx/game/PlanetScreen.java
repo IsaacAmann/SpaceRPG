@@ -56,6 +56,7 @@ public class PlanetScreen implements Screen
 	public Texture backgroundTexture;
 	public Texture hudTexture;
 	//Default humanoid Sprites
+	public Sprite defaultHumanoidSprite;
 	public Sprite defaultHumanoidHead;
 	public Sprite defaultHumanoidBody;
 	public Sprite defaultHumanoidLeg;
@@ -83,6 +84,7 @@ public class PlanetScreen implements Screen
 		backgroundTexture = new Texture(Gdx.files.internal("planet1Background.png"));
 		hudTexture = new Texture(Gdx.files.internal("planetHUDTexture.png"));
 		//default humanoid sprites
+		defaultHumanoidSprite = game.textureAtlas.createSprite("defaultHumanoidStanding1");
 		defaultHumanoidHead = game.textureAtlas.createSprite("defaultHumanoidHead");
 		defaultHumanoidBody = game.textureAtlas.createSprite("defaultHumanoidBody");
 		defaultHumanoidArm = game.textureAtlas.createSprite("defaultHumanoidArm");
@@ -94,6 +96,8 @@ public class PlanetScreen implements Screen
 		defaultHumanoidArm.flip(false,true);
 		defaultHumanoidForearm.flip(false,true);
 		defaultHumanoidLeg.flip(false,true);
+		defaultHumanoidSprite.flip(false,true);
+		
 		//Camera setup
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, screenWidth, screenHeight);
@@ -112,7 +116,7 @@ public class PlanetScreen implements Screen
 		testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 
 		//Entities
-		player = new Player(playerSprite, 2,0,25,80);
+		player = new Player(defaultHumanoidSprite, 2,0,25,80);
 		testHumanoid = new Humanoid(defaultHumanoidBody, defaultHumanoidArm, defaultHumanoidForearm, defaultHumanoidLeg, defaultHumanoidHead, 3, 0, 25, 80);
 
 		//Background
