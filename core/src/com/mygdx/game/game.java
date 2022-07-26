@@ -13,7 +13,7 @@ public class game extends Game {
 
 
 	public void create () {
-		textureAtlas = new TextureAtlas("textures.txt");
+		textureAtlas = new TextureAtlas("spaceRPGTextures.atlas");
 		batch = new SpriteBatch();
 		this.setScreen(new PlanetScreen(this));
 	}

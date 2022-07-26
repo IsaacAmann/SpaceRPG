@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import java.lang.Math;
-//comment
-public class Humanoid extends Entity
+
+public class HumanoidV2 extends Entity
 {
   /*Extension of entity class that simulates a humanoid with four limbs
     Limbs are only drawn and not simulated with Box2D
@@ -47,9 +47,11 @@ public class Humanoid extends Entity
   private float legXOffset;
   private float armXOffset;
   private float armYOffset;
+  
+    
 
 
-  public Humanoid(Sprite bodySprite, Sprite armSprite, Sprite forearmSprite, Sprite legSprite, Sprite headSprite, int x, int y, int width, int height)
+  public HumanoidV2(Sprite bodySprite, Sprite armSprite, Sprite forearmSprite, Sprite legSprite, Sprite headSprite, int x, int y, int width, int height)
   {
     super(bodySprite, x, y, width, height);
     rightArmSprite = new Sprite();
@@ -59,6 +61,20 @@ public class Humanoid extends Entity
     this.headSprite = new Sprite();
     rightForearmSprite = new Sprite();
     leftForearmSprite = new Sprite();
+    BodyDef bodyDef = new BodyDef();
+    bodyDef.type = BodyDef.BodyType.DynamicBody;
+    bodyDef.position.set(x, y);
+
+    PolygonShape shape = new PolygonShape();
+    shape.setAsBox(width/2 / PlanetScreen.PIXELS_TO_METERS, height/2 / PlanetScreen.PIXELS_TO_METERS);
+
+    FixtureDef fixtureDef = new FixtureDef();
+    fixtureDef.shape = shape;
+    fixtureDef.density = 1f;
+
+    body = PlanetScreen.world.createBody(bodyDef);
+    body.createFixture(fixtureDef);
+    shape.dispose();
     //Requires copies of sprites as the sprite class contains position and rotation data
     
     this.headSprite.set(headSprite);
