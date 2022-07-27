@@ -42,12 +42,11 @@ public class PlanetScreen implements Screen
 	private OrthographicCamera hudCamera;
 
 	public static Player player;
-	public Humanoid testHumanoid;
+	public HumanoidV2 testHumanoid;
 	public PlanetHUD planetHUD;
 
 	//Set up for map sectors
-	private int numberSectors;
-	private double sectorLength;
+	public Planet currentPlanet;
 
 	//Sprites and textures
 	public static Sprite testSprite;
@@ -111,13 +110,16 @@ public class PlanetScreen implements Screen
 		testSprite = game.textureAtlas.createSprite("stone");
 		debugRenderer = new Box2DDebugRenderer();
 
+		//Planet / Sector setup
+		currentPlanet = new Planet();
+		
 		//Terrain setup
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
 		testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 
 		//Entities
 		player = new Player(defaultHumanoidSprite, 2,0,25,80);
-		testHumanoid = new Humanoid(defaultHumanoidBody, defaultHumanoidArm, defaultHumanoidForearm, defaultHumanoidLeg, defaultHumanoidHead, 3, 0, 25, 80);
+		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
 
 		//Background
 		backgroundPosition1 = new Vector2(0, -screenHeight);
@@ -243,7 +245,7 @@ public class PlanetScreen implements Screen
 	{
 		manageInput();
 		player.update();
-
+		currentPlanet.update();
 	}
 
 	private void manageCamera()
@@ -286,6 +288,7 @@ public class PlanetScreen implements Screen
 			//testSprite.draw(game.batch);
 			drawTerrain(game.batch);
 			drawBackground(game.batch);
+			currentPlanet.draw(game.batch);
 			player.draw(game.batch);
 			testHumanoid.draw(game.batch);
 		game.batch.end();
