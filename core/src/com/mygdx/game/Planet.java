@@ -23,18 +23,31 @@ public class Planet
 		//Fill sectors ArrayList
 		for(int i = 0; i < numberSectors; i++)
 		{
-			Sector tempSector = new Sector();
+			Sector tempSector = new Sector(i*SECTOR_LENGTH, 0);
 			sectors.add(tempSector);
 		}
 	}
 	
 	public void update()
 	{
+		//monitor player position and load sectors 
 		
+		//Load all sectors for debugging
+		for(int i = 0; i < numberSectors; i++)
+		{
+			sectors.get(i).load();
+		}
 	}
 	
 	public void draw(SpriteBatch batch)
 	{
-		
+		//Render loaded sectors
+		for(int i = 0; i < numberSectors; i++)
+		{
+			if(sectors.get(i).isLoaded)
+			{
+				sectors.get(i).draw(batch);
+			}
+		}
 	}
 }

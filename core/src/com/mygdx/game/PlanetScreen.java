@@ -26,7 +26,7 @@ public class PlanetScreen implements Screen
 	private static final int SECTOR_LENGTH = 40;
 	public static final float PIXELS_TO_METERS = 100f;
 	private static final float DEFAULT_PLAYER_SPEED = 25f;
-	private static final int TERRAIN_Y_LEVEL = 6;
+	public static final int TERRAIN_Y_LEVEL = 6;
 	public static final float GRAVITY = 9.8f;
 
 	//Camera and screen variables
@@ -51,7 +51,7 @@ public class PlanetScreen implements Screen
 	//Sprites and textures
 	public static Sprite testSprite;
 	public Sprite playerSprite;
-	public Texture groundTexture;
+	public static Texture groundTexture;
 	public Texture backgroundTexture;
 	public Texture hudTexture;
 	//Default humanoid Sprites
@@ -111,11 +111,11 @@ public class PlanetScreen implements Screen
 		debugRenderer = new Box2DDebugRenderer();
 
 		//Planet / Sector setup
-		currentPlanet = new Planet();
+		currentPlanet = new Planet(5);
 		
 		//Terrain setup
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
-		testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
+		//testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 
 		//Entities
 		player = new Player(defaultHumanoidSprite, 2,0,25,80);
@@ -161,7 +161,7 @@ public class PlanetScreen implements Screen
 	private void drawTerrain(SpriteBatch batch)
 	{
 		//batch.draw(groundTexture, 0, screenHeight - TERRAIN_Y_LEVEL, SECTOR_LENGTH * PIXELS_TO_METERS, 200f, 0, 0, 200, TERRAIN_Y_LEVEL, false, false);
-		testTerrain.draw(batch);
+		//testTerrain.draw(batch);
 	}
 	private void drawBackground(SpriteBatch batch)
 	{
