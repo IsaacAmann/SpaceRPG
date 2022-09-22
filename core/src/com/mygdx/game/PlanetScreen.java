@@ -105,6 +105,10 @@ public class PlanetScreen implements Screen
 		playerPositionChange = new Vector3(0,0,0);
 		//End Camera setup
 
+		//Terrain setup
+		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
+		//testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
+
 		//Physics
 		world = new World(new Vector2(0, GRAVITY), true);
 		testSprite = game.textureAtlas.createSprite("stone");
@@ -113,9 +117,7 @@ public class PlanetScreen implements Screen
 		//Planet / Sector setup
 		currentPlanet = new Planet(5);
 		
-		//Terrain setup
-		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
-		//testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
+		
 
 		//Entities
 		player = new Player(defaultHumanoidSprite, 2,0,25,80);
@@ -269,7 +271,7 @@ public class PlanetScreen implements Screen
 		}
 		*/
 		camera.position.set(player.body.getPosition().x*PIXELS_TO_METERS,player.body.getPosition().y*PIXELS_TO_METERS - 150,0);
-		System.out.println("camera x: " + camera.position.x + "camera y: " + camera.position.y);
+		//System.out.println("camera x: " + camera.position.x + "camera y: " + camera.position.y);
 		camera.update();
 	}
 

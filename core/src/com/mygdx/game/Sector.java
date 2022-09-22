@@ -21,13 +21,10 @@ public class Sector
 	}	
 	
 	//Create physics objects for stored entities and create sprites
-	public void load()
+	public void load(float newX)
 	{
-		//update physics world cooridinates (loading when rolling over in the circular array should alter coordinates)
-		if(terrain == null)
-		{	
-			terrain = new TerrainPiece(PlanetScreen.groundTexture, x, y, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
-		}
+		this.x = newX;	
+		terrain = new TerrainPiece(PlanetScreen.groundTexture, x, y, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 		//create physics object
 		isLoaded = true;
 	}
@@ -36,10 +33,12 @@ public class Sector
 	public void unload()
 	{
 		terrain = null;
+		isLoaded = false;
 	}
 	
 	public void draw(SpriteBatch batch)
 	{
-		terrain.draw(batch);
+		if(isLoaded)
+			terrain.draw(batch);
 	}
 }

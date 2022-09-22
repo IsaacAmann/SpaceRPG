@@ -39,4 +39,14 @@ public class Player extends Entity
       body.applyForceToCenter(-WALK_FORCE,0,true);
     }
   }
+	public double getBodyX()
+	{
+		return body.getPosition().x;
+	}
+	
+	public double getBodyY()
+	{
+		return body.getPosition().y;
+	}
+	
 }

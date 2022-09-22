@@ -14,29 +14,83 @@ public class Planet
 	
 	private int numberSectors;
 	public CircularArrayList<Sector> sectors;
+	private int sectorsLoaded;
+	
+	//Reference to the loaded edge sectors, used to monitor when player is approaching the edge of what portion of the world is loaded 
+	private Sector leftEdgeSector;
+	private Sector rightEdgeSector;
+	private int rightEdgeSectorIndex;
+	private int leftEdgeSectorIndex;
 	
 	public Planet(int numberSectors)
 	{
 		sectors = new CircularArrayList<Sector>();
 		this.numberSectors = numberSectors;
+		sectorsLoaded = 0;
 		
-		//Fill sectors ArrayList
+		//Fill sectors 
 		for(int i = 0; i < numberSectors; i++)
 		{
 			Sector tempSector = new Sector(i*SECTOR_LENGTH, 0);
 			sectors.add(tempSector);
 		}
+		//load first sector when creating planet object
+		sectors.get(0).load(0);
+		rightEdgeSector = sectors.get(0);
+		leftEdgeSector = sectors.get(0);
+		rightEdgeSectorIndex = 0;
+		leftEdgeSectorIndex = 0;
 	}
 	
 	public void update()
 	{
 		//monitor player position and load sectors 
+		if(PlanetScreen.player.getBodyX() > rightEdgeSector.x)
+		{
+			float rightEdgeX = rightEdgeSector.x;
+			rightEdgeSector = sectors.get(rightEdgeSectorIndex + 1);
+			rightEdgeSectorIndex += 1;
+			rightEdgeSector.load(rightEdgeX + SECTOR_LENGTH);
+			System.out.println("Right Sector loaded, index: " + rightEdgeSectorIndex);
+		}
 		
-		//Load all sectors for debugging
+		if(PlanetScreen.player.getBodyX() < leftEdgeSector.x + SECTOR_LENGTH)
+		{
+			float leftEdgeX = leftEdgeSector.x;
+			leftEdgeSector = sectors.get(leftEdgeSectorIndex - 1);
+			leftEdgeSectorIndex -= 1;
+			leftEdgeSector.load(leftEdgeX - SECTOR_LENGTH);
+			System.out.println("Left Sector loaded, index: " + leftEdgeSectorIndex);
+		} 
+		
+		
+		//Check the current edge sectors and see if they are out of range and need to be unloaded
+		if(PlanetScreen.player.getBodyX() < rightEdgeSector.x - (2 * SECTOR_LENGTH))
+		{
+			float rightEdgeX = rightEdgeSector.x;
+			rightEdgeSector.unload();
+			rightEdgeSector = sectors.get(rightEdgeSectorIndex - 1);
+			rightEdgeSectorIndex -= 1;
+			System.out.println("Sector unloaded at: "+rightEdgeX+ " right edge sector at: " + rightEdgeSector.x);
+			
+		}
+		
+		if(PlanetScreen.player.getBodyX() > leftEdgeSector.x + (SECTOR_LENGTH*2))
+		{
+			float leftEdgeX = leftEdgeSector.x;
+			leftEdgeSector.unload();
+			leftEdgeSector = sectors.get(leftEdgeSectorIndex + 1);
+			leftEdgeSectorIndex += 1;
+			System.out.println("Sector unloaded at: " + leftEdgeX+" left edge sector at: " + leftEdgeSector.x);
+		}
+		
+		/*
+		 * //Load all sectors for debugging
 		for(int i = 0; i < numberSectors; i++)
 		{
 			sectors.get(i).load();
 		}
+		*/
 	}
 	
 	public void draw(SpriteBatch batch)
