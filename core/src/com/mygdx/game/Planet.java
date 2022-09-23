@@ -32,6 +32,7 @@ public class Planet
 		for(int i = 0; i < numberSectors; i++)
 		{
 			Sector tempSector = new Sector(i*SECTOR_LENGTH, 0);
+			tempSector.sectorID = i;
 			sectors.add(tempSector);
 		}
 		//load first sector when creating planet object
@@ -51,7 +52,7 @@ public class Planet
 			rightEdgeSector = sectors.get(rightEdgeSectorIndex + 1);
 			rightEdgeSectorIndex += 1;
 			rightEdgeSector.load(rightEdgeX + SECTOR_LENGTH);
-			System.out.println("Right Sector loaded, index: " + rightEdgeSectorIndex);
+			System.out.println("Right Sector loaded, index: " + rightEdgeSectorIndex + " Sector ID: " + rightEdgeSector.sectorID);
 		}
 		
 		if(PlanetScreen.player.getBodyX() < leftEdgeSector.x + SECTOR_LENGTH)
@@ -60,7 +61,7 @@ public class Planet
 			leftEdgeSector = sectors.get(leftEdgeSectorIndex - 1);
 			leftEdgeSectorIndex -= 1;
 			leftEdgeSector.load(leftEdgeX - SECTOR_LENGTH);
-			System.out.println("Left Sector loaded, index: " + leftEdgeSectorIndex);
+			System.out.println("Left Sector loaded, index: " + leftEdgeSectorIndex + " Sector ID: " + leftEdgeSector.sectorID);
 		} 
 		
 		
@@ -68,20 +69,22 @@ public class Planet
 		if(PlanetScreen.player.getBodyX() < rightEdgeSector.x - (2 * SECTOR_LENGTH))
 		{
 			float rightEdgeX = rightEdgeSector.x;
+			int oldSectorID = rightEdgeSector.sectorID;
 			rightEdgeSector.unload();
 			rightEdgeSector = sectors.get(rightEdgeSectorIndex - 1);
 			rightEdgeSectorIndex -= 1;
-			System.out.println("Sector unloaded at: "+rightEdgeX+ " right edge sector at: " + rightEdgeSector.x);
+			System.out.println("Sector unloaded at: "+rightEdgeX+ " right edge sector at: " + rightEdgeSector.x + " Sector ID: " + oldSectorID);
 			
 		}
 		
 		if(PlanetScreen.player.getBodyX() > leftEdgeSector.x + (SECTOR_LENGTH*2))
 		{
 			float leftEdgeX = leftEdgeSector.x;
+			int oldSectorID = leftEdgeSector.sectorID;
 			leftEdgeSector.unload();
 			leftEdgeSector = sectors.get(leftEdgeSectorIndex + 1);
 			leftEdgeSectorIndex += 1;
-			System.out.println("Sector unloaded at: " + leftEdgeX+" left edge sector at: " + leftEdgeSector.x);
+			System.out.println("Sector unloaded at: " + leftEdgeX+" left edge sector at: " + leftEdgeSector.x + " Sector ID: " + oldSectorID);
 		}
 		
 		/*

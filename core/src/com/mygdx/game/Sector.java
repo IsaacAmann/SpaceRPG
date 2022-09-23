@@ -12,6 +12,7 @@ public class Sector
 	public float y; 
 	public boolean isLoaded;
 	private TerrainPiece terrain;
+	public int sectorID;
 	
 	public Sector(float x, float y)
 	{
