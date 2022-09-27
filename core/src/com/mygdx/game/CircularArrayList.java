@@ -13,10 +13,10 @@ public class CircularArrayList<T> extends ArrayList<T>
 		}
 		else
 		{
-			System.out.println("index: " + index);
-			System.out.println("modulus operation: " + index % size());
 			int negativeIndex = (index % size()) + size();
-			if(index % size() == 0)
+			System.out.println("index: " + index + " Actual index: " + negativeIndex);
+			System.out.println("modulus operation: " + index % size());
+						if(index % size() == 0)
 			{
 				
 				return super.get(negativeIndex - 1);

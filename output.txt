@@ -1,0 +1,82 @@
+> Task :core:compileJava UP-TO-DATE
+> Task :core:processResources NO-SOURCE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+
+> Task :desktop:run
+Right Sector loaded, index: 1 Sector ID: 1
+index: -1 Actual index: 4
+modulus operation: -1
+Left Sector loaded, index: -1 Sector ID: 4
+Contact
+Contact
+index: -2 Actual index: 3
+modulus operation: -2
+Left Sector loaded, index: -2 Sector ID: 3
+Contact
+index: -3 Actual index: 2
+modulus operation: -3
+Left Sector loaded, index: -3 Sector ID: 2
+Sector unloaded at: 40.0 right edge sector at: 0.0 Sector ID: 1
+Contact
+index: -4 Actual index: 1
+modulus operation: -4
+Left Sector loaded, index: -4 Sector ID: 1
+index: -1 Actual index: 4
+modulus operation: -1
+Sector unloaded at: 0.0 right edge sector at: -40.0 Sector ID: 0
+Contact
+index: -5 Actual index: 5
+modulus operation: 0
+Left Sector loaded, index: -5 Sector ID: 4
+Right Sector loaded, index: 0 Sector ID: 0
+Right Sector loaded, index: 1 Sector ID: 1
+Contact
+Contact
+Contact
+index: -6 Actual index: 4
+modulus operation: -1
+Left Sector loaded, index: -6 Sector ID: 4
+Contact
+index: -7 Actual index: 3
+modulus operation: -2
+Left Sector loaded, index: -7 Sector ID: 3
+Sector unloaded at: -120.0 right edge sector at: -160.0 Sector ID: 1
+Contact
+index: -8 Actual index: 2
+modulus operation: -3
+Left Sector loaded, index: -8 Sector ID: 2
+index: -1 Actual index: 4
+modulus operation: -1
+Sector unloaded at: -160.0 right edge sector at: -240.0 Sector ID: 0
+Contact
+index: -9 Actual index: 1
+modulus operation: -4
+Left Sector loaded, index: -9 Sector ID: 1
+Contact
+index: -10 Actual index: 5
+modulus operation: 0
+Left Sector loaded, index: -10 Sector ID: 4
+Right Sector loaded, index: 0 Sector ID: 0
+Right Sector loaded, index: 1 Sector ID: 1
+Contact
+Contact
+Contact
+index: -11 Actual index: 4
+modulus operation: -1
+Left Sector loaded, index: -11 Sector ID: 4
+Contact
+index: -12 Actual index: 3
+modulus operation: -2
+Left Sector loaded, index: -12 Sector ID: 3
+Sector unloaded at: -320.0 right edge sector at: -360.0 Sector ID: 1
+Contact
+index: -13 Actual index: 2
+modulus operation: -3
+Left Sector loaded, index: -13 Sector ID: 2
+index: -1 Actual index: 4
+modulus operation: -1
+Sector unloaded at: -360.0 right edge sector at: -440.0 Sector ID: 0
