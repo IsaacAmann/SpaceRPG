@@ -56,6 +56,7 @@ public class Planet
 			rightEdgeSector = rightEdgeSector.next;
 			System.out.println("RightEdgeSectorAddress" + rightEdgeSector);
 			rightEdgeSector.data.load(rightEdgeX + SECTOR_LENGTH);
+			//System.out.println("rightEdgeSector isloaded" + rightEdgeSector.data.isLoaded);
 			System.out.println("Right Sector loaded. Sector ID: " + rightEdgeSector.data.sectorID);
 		}
 		
@@ -102,9 +103,11 @@ public class Planet
 		//Render loaded sectors
 		Node<Sector> currentSector = sectors.head;
 		currentSector.data.draw(batch);
+		currentSector = currentSector.next;
 		while(currentSector != sectors.head)
 		{
 			currentSector.data.draw(batch);
+			currentSector = currentSector.next;
 		}
 	}
 }

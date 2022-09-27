@@ -49,7 +49,7 @@ public class TerrainPiece
     //batch.draw(texture, body.getPosition().x*PIXELS_TO_METERS, (body.getPosition().y)*PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS, 0, 0, 256, 256, false, false);
     //batch.draw(texture, body.getPosition().x*PIXELS_TO_METERS, (body.getPosition().y)*PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS);
     batch.draw(texture, (x - width/2)*PIXELS_TO_METERS, y * PIXELS_TO_METERS, width*PIXELS_TO_METERS, height*PIXELS_TO_METERS);
-
+    //System.out.println("drawing" + this);
   }
 
   public void update()
