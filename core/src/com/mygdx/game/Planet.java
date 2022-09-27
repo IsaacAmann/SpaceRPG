@@ -52,7 +52,9 @@ public class Planet
 		if(PlanetScreen.player.getBodyX() > rightEdgeSector.data.x)
 		{
 			float rightEdgeX = rightEdgeSector.data.x;
+			System.out.println("Id before .next call :" + rightEdgeSector.data.sectorID);
 			rightEdgeSector = rightEdgeSector.next;
+			System.out.println("RightEdgeSectorAddress" + rightEdgeSector);
 			rightEdgeSector.data.load(rightEdgeX + SECTOR_LENGTH);
 			System.out.println("Right Sector loaded. Sector ID: " + rightEdgeSector.data.sectorID);
 		}

@@ -18,14 +18,14 @@ public class CircularLinkedList<T>
 			newNode = new Node<T>(dataArray[i]);
 			newNode.previous = currentNode;
 			//Catches null pointer exception when creating the first element
-			if(currentNode != null)
-				currentNode.next = newNode;
+			currentNode.next = newNode;
 			currentNode = newNode;
 			
 		}
 		//Link last node back to head
 		newNode = new Node<T>(dataArray[dataArray.length - 1]);
 		newNode.previous = currentNode;
+		currentNode.next = newNode;
 		newNode.next = head;
 		head.previous = newNode;
 	}
