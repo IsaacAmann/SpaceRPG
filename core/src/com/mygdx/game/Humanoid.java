@@ -87,6 +87,7 @@ public class Humanoid extends Entity
   public void update()
   {
     super.update();
+	
   }
 
   @Override
