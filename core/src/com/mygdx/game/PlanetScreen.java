@@ -54,6 +54,8 @@ public class PlanetScreen implements Screen
 	public static Texture groundTexture;
 	public Texture backgroundTexture;
 	public Texture hudTexture;
+	public ShapeRenderer shapeRenderer;
+	
 	//Default humanoid Sprites
 	public Sprite defaultHumanoidSprite;
 	public Sprite defaultHumanoidHead;
@@ -76,6 +78,7 @@ public class PlanetScreen implements Screen
 		game = gameObject;
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
+		shapeRenderer = new ShapeRenderer();
 		//Textures and Sprites
 		testSprite = game.textureAtlas.createSprite("stone");
 		playerSprite = game.textureAtlas.createSprite("player");
@@ -297,9 +300,10 @@ public class PlanetScreen implements Screen
 		debugRenderer.render(world, debugMatrix);
 		//HUD render calls
 		game.batch.setProjectionMatrix(hudCamera.combined);
+		shapeRenderer.setProjectionMatrix(hudCamera.combined);
 		game.batch.begin();
 			//game.batch.draw(groundTexture, 0, 0, 200, 44);
-			planetHUD.draw(game.batch);
+			planetHUD.draw(game.batch, shapeRenderer);
 		game.batch.end();
 
 	}
