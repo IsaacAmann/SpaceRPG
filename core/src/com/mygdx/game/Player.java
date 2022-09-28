@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import java.lang.Math;
 
 public class Player extends Entity
 {
@@ -29,15 +30,20 @@ public class Player extends Entity
 		if(PlanetScreen.playerInput.up && canJump)
 		{
 			System.out.println("Rotation: " + body.getAngle());
-			if(this.body.getAngle() > 1.4 || this.body.getAngle() < -1.4)
+			//check if player is knocked over by checking the rotation of the box2d body. Also only allow the player to get up if speed is reduced
+			if((this.body.getAngle() > 1.4 || this.body.getAngle() < -1.4)  && Math.abs(this.body.getLinearVelocity().x) < 1)
 			{
-				
+				//Might want to fix roation later and unfix it when player is damaged / hit with large force
 				body.setTransform(body.getPosition(), 0);
 			}
 			else
 			{
-				body.applyForceToCenter(0,-JUMP_FORCE,true);
-				canJump = false;
+				//Only allow jumping if the player is upright
+				if(!(this.body.getAngle() > 1.4 || this.body.getAngle() < -1.4))
+				{
+					body.applyForceToCenter(0,-JUMP_FORCE,true);
+					canJump = false;
+				}
 			}
 		}
 		if(PlanetScreen.playerInput.right && body.getLinearVelocity().x <= WALK_SPEED)
