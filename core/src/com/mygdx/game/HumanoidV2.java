@@ -18,6 +18,7 @@ public class HumanoidV2 extends Entity
 
   //Game property fields
   public int health;
+  public int startingHealth;
 
   //Sprites
   //Body sprite is already inherited from Entity class (field is named sprite)

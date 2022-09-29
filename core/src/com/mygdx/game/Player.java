@@ -11,10 +11,14 @@ public class Player extends Entity
 	private static float WALK_SPEED = 5f;
 	private static boolean isWalkingRight = true;
 	public static boolean canJump = false;
+	public int startingHealth;
+	public int health;
 
-	public Player(Sprite sprite, int x, int y, int width, int height)
+	public Player(Sprite sprite, int x, int y, int width, int height, int health)
 	{
-		super(sprite, x, y, width, height);	
+		super(sprite, x, y, width, height);
+		startingHealth = health;
+		this.health = health;
 	}
 
 	@Override

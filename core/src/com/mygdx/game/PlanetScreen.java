@@ -123,7 +123,7 @@ public class PlanetScreen implements Screen
 		
 
 		//Entities
-		player = new Player(defaultHumanoidSprite, 2,0,25,80);
+		player = new Player(defaultHumanoidSprite, 2,0,25,80, 100);
 		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
 
 		//Background
