@@ -118,7 +118,7 @@ public class PlanetScreen implements Screen
 		debugRenderer = new Box2DDebugRenderer();
 
 		//Planet / Sector setup
-		currentPlanet = new Planet(5);
+		currentPlanet = new Planet(100);
 		
 		
 

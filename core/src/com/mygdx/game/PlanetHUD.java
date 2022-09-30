@@ -36,6 +36,7 @@ public class PlanetHUD
 		float rectangleWidth = HEALTH_BAR_LENGTH * healthMultiplier;
 		
 		//Need to create queue for shape renderer calls, cant run shapes on shaprenderer without first ending spritebatch
+		//Use lambda expressions and store them in an array in the planetscreen class
 		
 	}
 	
