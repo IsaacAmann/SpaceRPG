@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Color;
+
 
 public class PlanetHUD
 {
@@ -30,20 +32,19 @@ public class PlanetHUD
 		HEALTH_BAR_HEIGHT = 50;
 	}
 	
-	private void manageHealthBar(SpriteBatch batch, ShapeRenderer shapeRenderer)
+	private void manageHealthBar(SpriteBatch batch, ShapeRenderer shapeRenderer, ShapeCallContainer shapeCallContainer)
 	{
 		float healthMultiplier = PlanetScreen.player.health / PlanetScreen.player.startingHealth;
 		float rectangleWidth = HEALTH_BAR_LENGTH * healthMultiplier;
-		
-		//Need to create queue for shape renderer calls, cant run shapes on shaprenderer without first ending spritebatch
-		//Use lambda expressions and store them in an array in the planetscreen class
-		
+		//Cannot draw the shapes directly, in order to use the shape renderer, the spritebatch has to be ended. 
+		//Used a container class to call all shapeRenderer calls in one batch to get around this
+		shapeCallContainer.addShapeCall(0, 0, 44, 44, Color.FIREBRICK);
 	}
 	
 
-	public void draw(SpriteBatch batch, ShapeRenderer shapeRenderer)
+	public void draw(SpriteBatch batch, ShapeRenderer shapeRenderer, ShapeCallContainer shapeCallContainer)
 	{
 		batch.draw(texture, 0, 0, PlanetScreen.screenWidth, PlanetScreen.screenHeight);
-		manageHealthBar(batch, shapeRenderer);
+		manageHealthBar(batch, shapeRenderer, shapeCallContainer);
     }
 }
