@@ -19,6 +19,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Matrix4;
 import java.util.ArrayList;
+import com.badlogic.gdx.graphics.Color;
 
 public class PlanetScreen implements Screen
 {
@@ -133,7 +134,7 @@ public class PlanetScreen implements Screen
 		//Background
 		backgroundPosition1 = new Vector2(0, -screenHeight);
 		backgroundPosition2 = new Vector2(-screenWidth, -screenHeight);
-
+		
 		//HUD setup
 		planetHUD = new PlanetHUD(hudTexture);
 
@@ -232,8 +233,6 @@ public class PlanetScreen implements Screen
 
 			if(Gdx.input.isKeyPressed(Input.Keys.D))
 			{
-				player.health -= 1;
-				System.out.println("health: " + player.health);
 				playerInput.right = true;
 			}
 			else
@@ -312,6 +311,8 @@ public class PlanetScreen implements Screen
 			//game.batch.draw(groundTexture, 0, 0, 200, 44);
 			planetHUD.draw(game.batch, shapeRenderer, shapeCallContainer);
 		game.batch.end();
+		
+		
 		shapeCallContainer.execute(shapeRenderer);
 		
 		

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Color;
+import java.util.ArrayList;
 
 
 public class PlanetHUD
@@ -20,12 +21,17 @@ public class PlanetHUD
 	private static float HEALTH_BAR_LENGTH = 280;
 	private float HEALTH_BAR_X_POSITION;
 	private float HEALTH_BAR_Y_POSITION; 
-	private static float HEALTH_BAR_HEIGHT = 20;;
+	private static float HEALTH_BAR_HEIGHT = 20;
 	
 	//Fields for energy bar
 	private float ENERGY_BAR_X_POSITION;
 	private float ENERGY_BAR_Y_POSITION;
 	private float ENERGY_BAR_HEIGHT;
+	
+	//Window system
+	private MenuWindow testWindow;
+	private ArrayList<MenuWindow> windows;
+	
 	
 	public PlanetHUD(Texture texture)
 	{
@@ -40,6 +46,10 @@ public class PlanetHUD
 		//positionss of energy bar retreived from image of hud
 		ENERGY_BAR_X_POSITION = 6;
 		ENERGY_BAR_Y_POSITION = screenHeight - HEALTH_BAR_HEIGHT - 742;
+		testWindow = new MenuWindow(screenWidth / 2 - 300, screenHeight / 2 - 300, 600, 600, Color.SCARLET, "Test Menu");
+		windows = new ArrayList<MenuWindow>();
+		
+		windows.add(testWindow);
 	}
 	
 	private void manageHealthBar(ShapeCallContainer shapeCallContainer)
@@ -69,5 +79,10 @@ public class PlanetHUD
 		batch.draw(texture, 0, 0, PlanetScreen.screenWidth, PlanetScreen.screenHeight);
 		manageHealthBar(shapeCallContainer);
 		manageEnergyBar(shapeCallContainer);
+		
+		for(int i = 0; i < windows.size(); i++)
+		{
+			windows.get(i).update(shapeCallContainer, batch);
+		}
     }
 }
