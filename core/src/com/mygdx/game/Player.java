@@ -13,12 +13,16 @@ public class Player extends Entity
 	public static boolean canJump = false;
 	public int startingHealth;
 	public int health;
+	public int startingEnergy;
+	public int energy;
 
-	public Player(Sprite sprite, int x, int y, int width, int height, int health)
+	public Player(Sprite sprite, int x, int y, int width, int height, int health, int energy)
 	{
 		super(sprite, x, y, width, height);
 		startingHealth = health;
 		this.health = health;
+		startingEnergy = energy;
+		this.energy = energy;
 	}
 
 	@Override

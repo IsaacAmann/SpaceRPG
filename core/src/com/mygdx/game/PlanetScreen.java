@@ -127,7 +127,7 @@ public class PlanetScreen implements Screen
 		
 
 		//Entities
-		player = new Player(defaultHumanoidSprite, 2,0,25,80, 100);
+		player = new Player(defaultHumanoidSprite, 2,0,25,80, 100, 100);
 		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
 
 		//Background
@@ -143,6 +143,7 @@ public class PlanetScreen implements Screen
 			@Override
 			public void beginContact(Contact contact)
 			{
+				
 				System.out.println("Contact");
 				if(contact.getFixtureA().getBody() == player.body || contact.getFixtureB().getBody() == player.body)
 				{
@@ -231,6 +232,8 @@ public class PlanetScreen implements Screen
 
 			if(Gdx.input.isKeyPressed(Input.Keys.D))
 			{
+				player.health -= 1;
+				System.out.println("health: " + player.health);
 				playerInput.right = true;
 			}
 			else
