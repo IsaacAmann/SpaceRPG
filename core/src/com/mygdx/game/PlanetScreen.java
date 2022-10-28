@@ -136,6 +136,13 @@ public class PlanetScreen implements Screen
 		Gdx.input.setInputProcessor(new InputAdapter()
 		{
 			@Override
+			public boolean touchDown(int screenX, int screenY, int pointer, int button)
+			{
+				
+				
+				return false;
+			}
+			@Override
 			public boolean keyDown(int keycode)
 			{
 				switch(keycode)
@@ -262,57 +269,11 @@ public class PlanetScreen implements Screen
 		static boolean fire = false;
 	}
 
-	private void manageInput()
-	{
-			if(Gdx.input.isKeyPressed(Input.Keys.W))
-			{
-				playerInput.up = true;
-			}else
-			{
-				playerInput.up = false;
-			}
-
-			if(Gdx.input.isKeyPressed(Input.Keys.S))
-			{
-				playerInput.down = true;
-			}else
-			{
-				playerInput.down = false;
-			}
-
-			if(Gdx.input.isKeyPressed(Input.Keys.A))
-			{
-				playerInput.left = true;
-			}
-			else
-			{
-				playerInput.left = false;
-			}
-
-			if(Gdx.input.isKeyPressed(Input.Keys.D))
-			{
-				playerInput.right = true;
-			}
-			else
-			{
-				playerInput.right = false;
-			}
-			if(Gdx.input.isKeyPressed(Input.Keys.ENTER))
-			{
-				playerInput.fire = true;
-			}
-			else
-			{
-				playerInput.fire = false;
-			}
-	}
-
 	//GAME OBJECT STUFF ----------------------------------------------------------------------
 
 	//game loop method
 	private void gameLoop()
 	{
-		//manageInput();
 		player.update();
 		currentPlanet.update();
 	}
