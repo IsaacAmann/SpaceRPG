@@ -46,7 +46,7 @@ public class PlanetHUD
 		//positionss of energy bar retreived from image of hud
 		ENERGY_BAR_X_POSITION = 6;
 		ENERGY_BAR_Y_POSITION = screenHeight - HEALTH_BAR_HEIGHT - 742;
-		testWindow = new MenuWindow(screenWidth / 2 - 300, screenHeight / 2 - 300, 600, 600, Color.SCARLET, "Test Menu");
+		testWindow = new MenuWindow(screenWidth / 2 - 300, screenHeight / 2 - 300, 600, 600, Color.SCARLET, "Test Menu", PlanetScreen.testWindowTexture);
 		windows = new ArrayList<MenuWindow>();
 		
 		windows.add(testWindow);
@@ -82,7 +82,7 @@ public class PlanetHUD
 		
 		for(int i = 0; i < windows.size(); i++)
 		{
-			windows.get(i).update(shapeCallContainer, batch);
+			windows.get(i).update(batch);
 		}
     }
 }

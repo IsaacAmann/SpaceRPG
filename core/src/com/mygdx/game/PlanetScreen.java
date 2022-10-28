@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Matrix4;
 import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.InputAdapter;
 
 public class PlanetScreen implements Screen
 {
@@ -56,6 +57,9 @@ public class PlanetScreen implements Screen
 	public static Texture groundTexture;
 	public Texture backgroundTexture;
 	public Texture hudTexture;
+	
+	//Window textures
+	public static Texture testWindowTexture;
 	
 	public ShapeCallContainer shapeCallContainer;
 	public ShapeRenderer shapeRenderer;
@@ -116,6 +120,9 @@ public class PlanetScreen implements Screen
 		//Terrain setup
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
 		//testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
+		
+		//Loading textures for different windows
+		testWindowTexture = new Texture(Gdx.files.internal("testWindow.png"));
 
 		//Physics
 		world = new World(new Vector2(0, GRAVITY), true);
@@ -125,7 +132,58 @@ public class PlanetScreen implements Screen
 		//Planet / Sector setup
 		currentPlanet = new Planet(100);
 		
-		
+		//Input processor
+		Gdx.input.setInputProcessor(new InputAdapter()
+		{
+			@Override
+			public boolean keyDown(int keycode)
+			{
+				switch(keycode)
+				{
+					case Input.Keys.W:
+						playerInput.up = true;
+					break;
+					
+					case Input.Keys.A:
+						playerInput.left = true;
+					break;
+					
+					case Input.Keys.S:
+						playerInput.down = true;
+					break;
+					
+					case Input.Keys.D:
+						playerInput.right = true;
+					break;
+				}
+				return false;
+			}
+			@Override
+			public boolean keyUp(int keycode)
+			{
+				switch(keycode)
+				{
+					case Input.Keys.W:
+						playerInput.up = false;
+					break;
+					
+					case Input.Keys.A:
+						playerInput.left = false;
+					break;
+				
+					case Input.Keys.S:
+						playerInput.down = false;
+					break;
+					
+					case Input.Keys.D:
+						playerInput.right = false;
+					break;
+				}
+				return false;
+			}
+			
+			
+		});
 
 		//Entities
 		player = new Player(defaultHumanoidSprite, 2,0,25,80, 100, 100);
@@ -254,7 +312,7 @@ public class PlanetScreen implements Screen
 	//game loop method
 	private void gameLoop()
 	{
-		manageInput();
+		//manageInput();
 		player.update();
 		currentPlanet.update();
 	}
