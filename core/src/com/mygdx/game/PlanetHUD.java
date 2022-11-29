@@ -82,7 +82,7 @@ public class PlanetHUD
 		
 		for(int i = 0; i < windows.size(); i++)
 		{
-			windows.get(i).update(batch);
+			//windows.get(i).update(batch);
 		}
     }
 }

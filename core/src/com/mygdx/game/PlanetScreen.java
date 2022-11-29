@@ -136,10 +136,37 @@ public class PlanetScreen implements Screen
 		Gdx.input.setInputProcessor(new InputAdapter()
 		{
 			@Override
+			public boolean mouseMoved(int x, int y)
+			{
+				playerInput.mouseReal.set(x, y, 0);
+				camera.unproject(playerInput.mouse.set(x,y,0));
+				//System.out.println("Real mouse cords x: " + playerInput.mouseReal.x + " y: " + playerInput.mouseReal.y + " Game Cords: x: " + playerInput.mouse.x + " y: " + playerInput.mouse.y);
+				return false;
+			}
+			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer, int button)
 			{
+				if(button == Input.Buttons.LEFT)
+				{
+					//Mouse cords handled by mouseMoved instead
+					//camera.unproject(playerInput.mouse.set(screenX, screenY, 0));
+					//playerInput.mouseReal.set(screenX, screenY, 0);
+					playerInput.mouseDown = true;
+					
+					
+					return true;
+				}
 				
-				
+				return false;
+			}
+			@Override
+			public boolean touchUp(int screenX, int screenY, int pointer, int button)
+			{
+				if(button == Input.Buttons.LEFT)
+				{
+					playerInput.mouseDown = false;
+					return true;
+				}
 				return false;
 			}
 			@Override
@@ -267,6 +294,9 @@ public class PlanetScreen implements Screen
 		static boolean left = false;
 		static boolean right = false;
 		static boolean fire = false;
+		static boolean mouseDown = false;
+		static Vector3 mouse = new Vector3(0,0,0);
+		static Vector3 mouseReal = new Vector3(0,0,0);
 	}
 
 	//GAME OBJECT STUFF ----------------------------------------------------------------------
