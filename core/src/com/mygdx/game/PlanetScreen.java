@@ -22,6 +22,10 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.InputAdapter;
 
+
+import com.strongjoshua.console.*;
+
+
 public class PlanetScreen implements Screen
 {
 	//constants
@@ -79,6 +83,9 @@ public class PlanetScreen implements Screen
 	private TerrainPiece testTerrain;
 	private Box2DDebugRenderer debugRenderer;
 	//Entity stuff
+	
+	//debug console 
+	public GUIConsole console;
 
 
 	public PlanetScreen(final game gameObject)
@@ -132,6 +139,11 @@ public class PlanetScreen implements Screen
 		//Planet / Sector setup
 		currentPlanet = new Planet(100);
 		
+		//console
+		console = new GUIConsole();
+		console.setSizePercent(100f, 100f);
+		console.setPosition(50, 50);
+		console.setVisible(true);
 		//Input processor
 		Gdx.input.setInputProcessor(new InputAdapter()
 		{
@@ -188,6 +200,10 @@ public class PlanetScreen implements Screen
 					
 					case Input.Keys.D:
 						playerInput.right = true;
+					break;
+					
+					case Input.Keys.GRAVE:
+						console.setVisible(!console.isVisible());
 					break;
 				}
 				return false;
@@ -343,7 +359,7 @@ public class PlanetScreen implements Screen
 		manageCamera();
 		game.batch.setProjectionMatrix(camera.combined);
 		debugMatrix = game.batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);
-
+		
 		game.batch.begin();
 			//testSprite.draw(game.batch);
 			drawTerrain(game.batch);
@@ -363,7 +379,8 @@ public class PlanetScreen implements Screen
 		
 		
 		shapeCallContainer.execute(shapeRenderer);
-		
+		console.refresh();
+		console.draw();
 		
 		
 
