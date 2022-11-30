@@ -139,102 +139,17 @@ public class PlanetScreen implements Screen
 		//Planet / Sector setup
 		currentPlanet = new Planet(100);
 		
-		//console
-		console = new GUIConsole();
+		
+		//Input processor
+		Gdx.input.setInputProcessor(new GameInputProcessor());
+		//console setup
+		console = new GUIConsole(true);
 		console.setSizePercent(100f, 100f);
 		console.setPosition(50, 50);
 		console.setVisible(true);
-		//Input processor
-		Gdx.input.setInputProcessor(new InputAdapter()
-		{
-			@Override
-			public boolean mouseMoved(int x, int y)
-			{
-				playerInput.mouseReal.set(x, y, 0);
-				camera.unproject(playerInput.mouse.set(x,y,0));
-				//System.out.println("Real mouse cords x: " + playerInput.mouseReal.x + " y: " + playerInput.mouseReal.y + " Game Cords: x: " + playerInput.mouse.x + " y: " + playerInput.mouse.y);
-				return false;
-			}
-			@Override
-			public boolean touchDown(int screenX, int screenY, int pointer, int button)
-			{
-				if(button == Input.Buttons.LEFT)
-				{
-					//Mouse cords handled by mouseMoved instead
-					//camera.unproject(playerInput.mouse.set(screenX, screenY, 0));
-					//playerInput.mouseReal.set(screenX, screenY, 0);
-					playerInput.mouseDown = true;
-					
-					
-					return true;
-				}
-				
-				return false;
-			}
-			@Override
-			public boolean touchUp(int screenX, int screenY, int pointer, int button)
-			{
-				if(button == Input.Buttons.LEFT)
-				{
-					playerInput.mouseDown = false;
-					return true;
-				}
-				return false;
-			}
-			@Override
-			public boolean keyDown(int keycode)
-			{
-				switch(keycode)
-				{
-					case Input.Keys.W:
-						playerInput.up = true;
-					break;
-					
-					case Input.Keys.A:
-						playerInput.left = true;
-					break;
-					
-					case Input.Keys.S:
-						playerInput.down = true;
-					break;
-					
-					case Input.Keys.D:
-						playerInput.right = true;
-					break;
-					
-					case Input.Keys.GRAVE:
-						console.setVisible(!console.isVisible());
-					break;
-				}
-				return false;
-			}
-			@Override
-			public boolean keyUp(int keycode)
-			{
-				switch(keycode)
-				{
-					case Input.Keys.W:
-						playerInput.up = false;
-					break;
-					
-					case Input.Keys.A:
-						playerInput.left = false;
-					break;
-				
-					case Input.Keys.S:
-						playerInput.down = false;
-					break;
-					
-					case Input.Keys.D:
-						playerInput.right = false;
-					break;
-				}
-				return false;
-			}
-			
-			
-		});
-
+		console.setCommandExecutor(new ConsoleCommandExecutor());
+		console.setDisplayKeyID(Input.Keys.GRAVE);
+		
 		//Entities
 		player = new Player(defaultHumanoidSprite, 2,0,25,80, 100, 100);
 		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
@@ -349,6 +264,93 @@ public class PlanetScreen implements Screen
 		camera.update();
 	}
 
+	public class GameInputProcessor extends InputAdapter
+	{
+		@Override
+			public boolean mouseMoved(int x, int y)
+			{
+				playerInput.mouseReal.set(x, y, 0);
+				camera.unproject(playerInput.mouse.set(x,y,0));
+				//System.out.println("Real mouse cords x: " + playerInput.mouseReal.x + " y: " + playerInput.mouseReal.y + " Game Cords: x: " + playerInput.mouse.x + " y: " + playerInput.mouse.y);
+				return false;
+			}
+			@Override
+			public boolean touchDown(int screenX, int screenY, int pointer, int button)
+			{
+				if(button == Input.Buttons.LEFT)
+				{
+					//Mouse cords handled by mouseMoved instead
+					//camera.unproject(playerInput.mouse.set(screenX, screenY, 0));
+					//playerInput.mouseReal.set(screenX, screenY, 0);
+					playerInput.mouseDown = true;
+					
+					
+					return true;
+				}
+				
+				return false;
+			}
+			@Override
+			public boolean touchUp(int screenX, int screenY, int pointer, int button)
+			{
+				if(button == Input.Buttons.LEFT)
+				{
+					playerInput.mouseDown = false;
+					return true;
+				}
+				return false;
+			}
+			@Override
+			public boolean keyDown(int keycode)
+			{
+				switch(keycode)
+				{
+					case Input.Keys.W:
+						playerInput.up = true;
+					break;
+					
+					case Input.Keys.A:
+						playerInput.left = true;
+					break;
+					
+					case Input.Keys.S:
+						playerInput.down = true;
+					break;
+					
+					case Input.Keys.D:
+						playerInput.right = true;
+					break;
+					
+					case Input.Keys.GRAVE:
+						
+					break;
+				}
+				return false;
+			}
+			@Override
+			public boolean keyUp(int keycode)
+			{
+				switch(keycode)
+				{
+					case Input.Keys.W:
+						playerInput.up = false;
+					break;
+					
+					case Input.Keys.A:
+						playerInput.left = false;
+					break;
+				
+					case Input.Keys.S:
+						playerInput.down = false;
+					break;
+					
+					case Input.Keys.D:
+						playerInput.right = false;
+					break;
+				}
+				return false;
+			}
+	}
 
 	@Override
 	public void render(float delta)
@@ -422,4 +424,11 @@ public class PlanetScreen implements Screen
 
 	}
 
+	public class ConsoleCommandExecutor extends CommandExecutor
+	{
+		public void spawnHuman()
+		{
+			testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
+		}
+	}
 }
