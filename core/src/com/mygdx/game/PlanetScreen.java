@@ -430,5 +430,9 @@ public class PlanetScreen implements Screen
 		{
 			testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
 		}
+		public void fling(float force)
+		{
+			player.body.applyTorque(force,true);
+		}
 	}
 }
