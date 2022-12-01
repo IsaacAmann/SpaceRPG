@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Matrix4;
@@ -56,8 +56,6 @@ public class PlanetScreen implements Screen
 	public Planet currentPlanet;
 
 	//Sprites and textures
-	public static Sprite testSprite;
-	public Sprite playerSprite;
 	public static Texture groundTexture;
 	public Texture backgroundTexture;
 	public Texture hudTexture;
@@ -69,14 +67,8 @@ public class PlanetScreen implements Screen
 	public ShapeRenderer shapeRenderer;
 	
 	//Default humanoid Sprites
-	public Sprite defaultHumanoidSprite;
-	public Sprite defaultHumanoidHead;
-	public Sprite defaultHumanoidBody;
-	public Sprite defaultHumanoidLeg;
-	public Sprite defaultHumanoidArm;
-	public Sprite defaultHumanoidForearm;
-
-
+	public TextureRegion defaultHumanoidSprite;
+	
 	//Physics stuff
 	public static World world;
 	private ArrayList<Body> terrainSections;
@@ -96,24 +88,12 @@ public class PlanetScreen implements Screen
 		shapeRenderer = new ShapeRenderer();
 		shapeCallContainer = new ShapeCallContainer();
 		//Textures and Sprites
-		testSprite = game.textureAtlas.createSprite("stone");
-		playerSprite = game.textureAtlas.createSprite("player");
-		playerSprite.flip(false,true);
+		//playerSprite = game.textureAtlas.findRegion("player");
+		//playerSprite.flip(false,true);
 		backgroundTexture = new Texture(Gdx.files.internal("planet1Background.png"));
 		hudTexture = new Texture(Gdx.files.internal("planetHUDTexture.png"));
 		//default humanoid sprites
-		defaultHumanoidSprite = game.textureAtlas.createSprite("defaultHumanoidStanding1");
-		defaultHumanoidHead = game.textureAtlas.createSprite("defaultHumanoidHead");
-		defaultHumanoidBody = game.textureAtlas.createSprite("defaultHumanoidBody");
-		defaultHumanoidArm = game.textureAtlas.createSprite("defaultHumanoidArm");
-		defaultHumanoidForearm = game.textureAtlas.createSprite("defaultHumanoidForearm");
-		defaultHumanoidLeg = game.textureAtlas.createSprite("defaultHumanoidLeg");
-
-		defaultHumanoidHead.flip(false,true);
-		defaultHumanoidBody.flip(false,true);
-		defaultHumanoidArm.flip(false,true);
-		defaultHumanoidForearm.flip(false,true);
-		defaultHumanoidLeg.flip(false,true);
+		defaultHumanoidSprite = game.textureAtlas.findRegion("defaultHumanoidStanding1");
 		defaultHumanoidSprite.flip(false,true);
 		
 		//Camera setup
@@ -133,7 +113,6 @@ public class PlanetScreen implements Screen
 
 		//Physics
 		world = new World(new Vector2(0, GRAVITY), true);
-		testSprite = game.textureAtlas.createSprite("stone");
 		debugRenderer = new Box2DDebugRenderer();
 
 		//Planet / Sector setup

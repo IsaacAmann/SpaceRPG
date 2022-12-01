@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.utils.TimeUtils;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.lang.Math;
 
 public class Player extends Entity
@@ -16,9 +16,9 @@ public class Player extends Entity
 	public int startingEnergy;
 	public int energy;
 
-	public Player(Sprite sprite, int x, int y, int width, int height, int health, int energy)
+	public Player(TextureRegion textureRegion, float x, float y, int width, int height, int health, int energy)
 	{
-		super(sprite, x, y, width, height);
+		super(textureRegion, x, y, width, height);
 		startingHealth = health;
 		this.health = health;
 		startingEnergy = energy;
@@ -58,14 +58,14 @@ public class Player extends Entity
 		{
 			body.applyForceToCenter(WALK_FORCE,0,true);
 			if(isWalkingRight != true)
-				super.sprite.flip(true,false);
+				super.textureRegion.flip(true,false);
 			isWalkingRight = true;
 		}
 		if(PlanetScreen.playerInput.left && body.getLinearVelocity().x >= -WALK_SPEED)
 		{
 			body.applyForceToCenter(-WALK_FORCE,0,true);
 			if(isWalkingRight == true)
-				super.sprite.flip(true,false);
+				super.textureRegion.flip(true,false);
 			isWalkingRight = false;
 		}
 	}

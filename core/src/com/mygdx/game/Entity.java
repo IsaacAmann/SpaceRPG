@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -12,17 +13,20 @@ import java.lang.Math;
 public abstract class Entity
 {
   public Body body;
-  public Sprite sprite;
+  public TextureRegion textureRegion;
   public static final float RADIANS_TO_DEGREES = (180 / (float) Math.PI);
   public float width;
   public float height;
+  public float x;
+  public float y;
 
-  public Entity(Sprite sprite, int x, int y, int width, int height)
+  public Entity(TextureRegion textureRegion, float x, float y, int width, int height)
   {
-    this.sprite = new Sprite();
-    this.sprite.set(sprite);
-    this.width = width;
-    this.height = height;
+    this.textureRegion = new TextureRegion(textureRegion);
+    this.width = textureRegion.getRegionWidth();
+    this.height = textureRegion.getRegionHeight();
+    this.x = x;
+    this.y = y;
     
     BodyDef bodyDef = new BodyDef();
     bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -46,8 +50,14 @@ public abstract class Entity
   }
   public void draw(SpriteBatch batch)
   {
+	x = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS - width/2;
+	y = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS - height/2;
+	
+	batch.draw(textureRegion, x, y, width/2, height/2, width, height, 1, 1, this.body.getAngle() * RADIANS_TO_DEGREES);  
+	/*  
     this.sprite.setPosition((this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS)-sprite.getWidth()/2, (this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS)-sprite.getHeight()/2);
     this.sprite.setRotation(this.body.getAngle() * RADIANS_TO_DEGREES);
     this.sprite.draw(batch);
+    */
   }
 }
