@@ -10,11 +10,13 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class game extends Game {
 	public SpriteBatch batch;
 	public TextureAtlas textureAtlas;
+	public DataStore dataStore;
 
 
 	public void create () {
 		textureAtlas = new TextureAtlas("spaceRPGTextures.atlas");
 		batch = new SpriteBatch();
+		dataStore = new DataStore();
 		this.setScreen(new PlanetScreen(this));
 	}
 

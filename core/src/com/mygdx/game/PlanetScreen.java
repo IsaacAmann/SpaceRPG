@@ -76,6 +76,11 @@ public class PlanetScreen implements Screen
 	private Box2DDebugRenderer debugRenderer;
 	//Entity stuff
 	
+	//Stores Entity objects, should unload to another array list within the sector when sector is unloaded
+	//When loading from sector, entity objects should be pushed into this list
+	public ArrayList<Entity> loadedEntities;
+	
+	
 	//debug console 
 	public GUIConsole console;
 
