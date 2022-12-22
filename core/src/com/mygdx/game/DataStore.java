@@ -7,9 +7,12 @@ public class DataStore
 {
 	public HashMap<Integer, NPC> NPCMap;
 	
+	public HashMap<Integer, Planet> planetMap;
+	
 	public DataStore()
 	{
 		NPCMap = new HashMap<Integer, NPC>();
+		planetMap = new HashMap<Integer, Planet>();
 	}
 	
 	//Player data store
@@ -18,8 +21,10 @@ public class DataStore
 		//currency amount in player's bank
 		public double credits = 0;
 		
+		public Planet planet = null;
+		public float x = 0;
+		public float y = 0;
 	}
-	
 	
 	
 }

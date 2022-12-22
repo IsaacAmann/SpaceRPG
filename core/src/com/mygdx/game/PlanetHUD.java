@@ -29,7 +29,7 @@ public class PlanetHUD
 	private float ENERGY_BAR_HEIGHT;
 	
 	//Window system
-	private MenuWindow testWindow;
+	public static MenuWindow inventoryWindow;
 	private ArrayList<MenuWindow> windows;
 	
 	
@@ -46,10 +46,10 @@ public class PlanetHUD
 		//positionss of energy bar retreived from image of hud
 		ENERGY_BAR_X_POSITION = 6;
 		ENERGY_BAR_Y_POSITION = screenHeight - HEALTH_BAR_HEIGHT - 742;
-		testWindow = new MenuWindow(screenWidth / 2 - 300, screenHeight / 2 - 300, 600, 600, Color.SCARLET, "Test Menu", PlanetScreen.testWindowTexture);
+		inventoryWindow = new MenuWindow(screenWidth / 2 - 300, screenHeight / 2 - 300, 600, 600, Color.SCARLET, "Inventory", PlanetScreen.inventoryWindowTexture, false);
 		windows = new ArrayList<MenuWindow>();
 		
-		windows.add(testWindow);
+		windows.add(inventoryWindow);
 	}
 	
 	private void manageHealthBar(ShapeCallContainer shapeCallContainer)
@@ -82,7 +82,7 @@ public class PlanetHUD
 		
 		for(int i = 0; i < windows.size(); i++)
 		{
-			//windows.get(i).update(batch);
+			windows.get(i).update(batch);
 		}
     }
 }

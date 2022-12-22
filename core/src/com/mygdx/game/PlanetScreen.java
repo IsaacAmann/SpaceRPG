@@ -62,6 +62,7 @@ public class PlanetScreen implements Screen
 	
 	//Window textures
 	public static Texture testWindowTexture;
+	public static Texture inventoryWindowTexture;
 	
 	public ShapeCallContainer shapeCallContainer;
 	public ShapeRenderer shapeRenderer;
@@ -115,6 +116,7 @@ public class PlanetScreen implements Screen
 		
 		//Loading textures for different windows
 		testWindowTexture = new Texture(Gdx.files.internal("testWindow.png"));
+		inventoryWindowTexture = new Texture(Gdx.files.internal("inventoryWindowTexture.png"));
 
 		//Physics
 		world = new World(new Vector2(0, GRAVITY), true);
@@ -303,6 +305,10 @@ public class PlanetScreen implements Screen
 					
 					case Input.Keys.D:
 						playerInput.right = true;
+					break;
+					
+					case Input.Keys.E:
+						PlanetHUD.inventoryWindow.toggleVisible();
 					break;
 					
 					case Input.Keys.GRAVE:

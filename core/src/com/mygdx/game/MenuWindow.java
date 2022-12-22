@@ -24,9 +24,10 @@ public class MenuWindow
 	private int screenWidth;
 	private int screenHeight;
 	
+	public boolean visible;
 	private Texture windowTexture;
 	
-	public MenuWindow(float x, float y, float width, float height, Color backgroundColor, String menuLabel, Texture texture)
+	public MenuWindow(float x, float y, float width, float height, Color backgroundColor, String menuLabel, Texture texture, boolean visible)
 	{
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
@@ -40,13 +41,22 @@ public class MenuWindow
 		titleFont = new BitmapFont();
 		titleFont.setColor(Color.BLACK);
 		windowTexture = texture;
+		this.visible = visible;
+	}
+	
+	public void toggleVisible()
+	{
+		visible = !visible;
 	}
 	
 	public void update(SpriteBatch batch)
 	{
 		//shapeCallContainer.addShapeCall(xPosition, yPosition, width, height, backgroundColor);
 		//May need to queue font calls with shapes as well, no way to overlay the text and control what is drawn first.
-		batch.draw(windowTexture, xPosition, yPosition, 600, 600);
-		titleFont.draw(batch, menuLabel, xPosition, yPosition + height);
+		if(visible)
+		{
+			batch.draw(windowTexture, xPosition, yPosition, 600, 600);
+			titleFont.draw(batch, menuLabel, xPosition, yPosition + height);
+		}
 	}
 }
