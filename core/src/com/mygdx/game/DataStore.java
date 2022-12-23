@@ -1,5 +1,6 @@
 package com.mygdx.game;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 //store world state, player state, persistent NPC's, map information
 //should conatain all data that will be saved / loaded when saving is implemented
@@ -8,6 +9,8 @@ public class DataStore
 	public HashMap<Integer, NPC> NPCMap;
 	
 	public HashMap<Integer, Planet> planetMap;
+	
+	
 	
 	public DataStore()
 	{
@@ -24,6 +27,8 @@ public class DataStore
 		public Planet planet = null;
 		public float x = 0;
 		public float y = 0;
+		
+		public ArrayList<Item> inventory = new ArrayList<Item>();
 	}
 	
 	
