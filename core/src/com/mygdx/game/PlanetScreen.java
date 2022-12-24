@@ -89,6 +89,7 @@ public class PlanetScreen implements Screen
 	public PlanetScreen(final game gameObject)
 	{
 		game = gameObject;
+		
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 		shapeRenderer = new ShapeRenderer();
@@ -138,6 +139,9 @@ public class PlanetScreen implements Screen
 		
 		//Entities
 		player = new Player(defaultHumanoidSprite, 2,0,25,80, 100, 100);
+		//Test inventory item
+		ResourceItem testItem = new ResourceItem(defaultHumanoidSprite);
+		game.dataStore.playerData.addInventoryItem(testItem);
 		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
 
 		//Background
