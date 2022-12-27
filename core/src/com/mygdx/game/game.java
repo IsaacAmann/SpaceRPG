@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class game extends Game {
 	public SpriteBatch batch;
 	public TextureAtlas textureAtlas;
-	public DataStore dataStore;
+	public static DataStore dataStore;
 
 
 	public void create () {

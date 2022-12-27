@@ -141,6 +141,7 @@ public class PlanetScreen implements Screen
 		player = new Player(defaultHumanoidSprite, 2,0,25,80, 100, 100);
 		//Test inventory item
 		ResourceItem testItem = new ResourceItem(defaultHumanoidSprite);
+		for(int i=0; i < 40; i++)
 		game.dataStore.playerData.addInventoryItem(testItem);
 		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
 
@@ -427,6 +428,17 @@ public class PlanetScreen implements Screen
 		public void fling(float force)
 		{
 			player.body.applyTorque(force,true);
+		}
+		public void displayInventory()
+		{
+			for(int i = 0; i < game.dataStore.playerData.inventory.length; i++)
+			{
+				for(int j = 0; j < game.dataStore.playerData.inventory[i].length; j++)
+				{
+					if(game.dataStore.playerData.inventory[i][j] != null)
+						console.log(i + ", " + j + " ItemID =  " + game.dataStore.playerData.inventory[i][j].itemID);
+				}
+			}
 		}
 	}
 }

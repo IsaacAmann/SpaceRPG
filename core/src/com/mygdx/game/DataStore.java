@@ -24,13 +24,27 @@ public class DataStore
 	{
 		public PlayerData()
 		{
-			inventory = new ArrayList<Item>();	
+			//inventory = new ArrayList<Item>();
+			inventory = new Item[7][13];
 		}
 		
-		public void addInventoryItem(Item item)
+		public boolean addInventoryItem(Item item)
 		{
-			currentItems++;
-			inventory.add(item);	
+			//Attempt to place the item in the inventory array, return false if it was not added
+			boolean output = false;
+			for(int i = 0; i < inventory.length && output == false; i++)
+			{
+				for(int j = 0; j < inventory[i].length; j++)
+				{
+					if(inventory[i][j] == null)
+					{
+						inventory[i][j] = item;
+						output = true;
+						break;
+					}
+				}
+			}
+			return output;
 		}
 		//currency amount in player's bank
 		public double credits = 0;
@@ -40,7 +54,7 @@ public class DataStore
 		public float y = 0;
 		public int currentItems = 0;
 		
-		public ArrayList<Item> inventory;
+		public Item inventory[][];
 	}
 	
 	
