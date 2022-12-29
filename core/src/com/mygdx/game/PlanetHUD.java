@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Color;
 import java.util.ArrayList;
-
+import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class PlanetHUD
 {
@@ -28,10 +30,8 @@ public class PlanetHUD
 	private float ENERGY_BAR_Y_POSITION;
 	private float ENERGY_BAR_HEIGHT;
 	
-	//Window system
-	public static InventoryWindow inventoryWindow;
-	private ArrayList<MenuWindow> windows;
-	
+	//Stage for new window system
+	public Stage stage;
 	
 	public PlanetHUD(Texture texture)
 	{
@@ -39,6 +39,8 @@ public class PlanetHUD
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 		
+		stage = new Stage(new StretchViewport(screenWidth, screenHeight));
+		fillUIElements();
 		//positions of health bar retrieved from image of hud
 		HEALTH_BAR_X_POSITION = 6;
 		HEALTH_BAR_Y_POSITION = screenHeight - HEALTH_BAR_HEIGHT - 686;
@@ -46,10 +48,7 @@ public class PlanetHUD
 		//positionss of energy bar retreived from image of hud
 		ENERGY_BAR_X_POSITION = 6;
 		ENERGY_BAR_Y_POSITION = screenHeight - HEALTH_BAR_HEIGHT - 742;
-		inventoryWindow = new InventoryWindow(screenWidth / 2 - 300, screenHeight / 2 - 300, 600, 600, Color.SCARLET, "Inventory", PlanetScreen.inventoryWindowTexture, false);
-		windows = new ArrayList<MenuWindow>();
 		
-		windows.add(inventoryWindow);
 	}
 	
 	private void manageHealthBar(ShapeCallContainer shapeCallContainer)
@@ -73,16 +72,24 @@ public class PlanetHUD
 			shapeCallContainer.addShapeCall(ENERGY_BAR_X_POSITION, ENERGY_BAR_Y_POSITION, rectangleWidth, HEALTH_BAR_HEIGHT, Color.BLUE);
 	}
 	
+	private void fillUIElements()
+	{
+		Table mainTable = new Table();
+		mainTable.setFillParent(true);
+		
+		Image testImage = new Image(PlanetScreen.defaultHumanoidSprite);
+		mainTable.addActor(testImage);
+		
+		stage.addActor(mainTable);
+		
+	}
 
 	public void draw(SpriteBatch batch, ShapeRenderer shapeRenderer, ShapeCallContainer shapeCallContainer)
 	{
 		batch.draw(texture, 0, 0, PlanetScreen.screenWidth, PlanetScreen.screenHeight);
 		manageHealthBar(shapeCallContainer);
 		manageEnergyBar(shapeCallContainer);
-		
-		for(int i = 0; i < windows.size(); i++)
-		{
-			windows.get(i).update(batch);
-		}
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
     }
 }

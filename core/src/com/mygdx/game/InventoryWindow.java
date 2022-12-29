@@ -30,8 +30,8 @@ public class InventoryWindow extends MenuWindow
 			//System.out.println("hit " + "x: " + mouse.x + ", " + mouse.y + " " + xPosition + " " + yPosition	);
 			if(PlanetScreen.playerInput.mouseDown)
 			{
-				int i = (int)mouse.y % 45;
-				int j = (int)mouse.x % 45;
+				int i = (int)mouse.y / 45;
+				int j = (int)mouse.x / 45;
 				System.out.println("Inventory ref: x: " + i + " y: " + j);
 				//game.dataStore.playerData.inventory[i][j] = null;
 			}

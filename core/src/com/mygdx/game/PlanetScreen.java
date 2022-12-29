@@ -21,6 +21,10 @@ import com.badlogic.gdx.math.Matrix4;
 import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.scenes.scene2d.*;
+
+
 
 
 import com.strongjoshua.console.*;
@@ -68,7 +72,7 @@ public class PlanetScreen implements Screen
 	public ShapeRenderer shapeRenderer;
 	
 	//Default humanoid Sprites
-	public TextureRegion defaultHumanoidSprite;
+	public static TextureRegion defaultHumanoidSprite;
 	
 	//Physics stuff
 	public static World world;
@@ -111,6 +115,9 @@ public class PlanetScreen implements Screen
 		playerPositionChange = new Vector3(0,0,0);
 		//End Camera setup
 
+		//HUD setup
+		planetHUD = new PlanetHUD(hudTexture);
+
 		//Terrain setup
 		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
 		//testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
@@ -128,7 +135,13 @@ public class PlanetScreen implements Screen
 		
 		
 		//Input processor
-		Gdx.input.setInputProcessor(new GameInputProcessor());
+		InputMultiplexer multiplexer = new InputMultiplexer();
+		multiplexer.addProcessor(new GameInputProcessor());
+		multiplexer.addProcessor(planetHUD.stage);
+		//Gdx.input.setInputProcessor(new GameInputProcessor());
+		Gdx.input.setInputProcessor(multiplexer);
+		
+		
 		//console setup
 		console = new GUIConsole(true);
 		console.setSizePercent(100f, 100f);
@@ -149,8 +162,6 @@ public class PlanetScreen implements Screen
 		backgroundPosition1 = new Vector2(0, -screenHeight);
 		backgroundPosition2 = new Vector2(-screenWidth, -screenHeight);
 		
-		//HUD setup
-		planetHUD = new PlanetHUD(hudTexture);
 
 		//Contact Listener
 		world.setContactListener(new ContactListener()
@@ -315,7 +326,7 @@ public class PlanetScreen implements Screen
 					break;
 					
 					case Input.Keys.E:
-						PlanetHUD.inventoryWindow.toggleVisible();
+						//PlanetHUD.inventoryWindow.toggleVisible();
 					break;
 					
 					case Input.Keys.GRAVE:
