@@ -55,7 +55,7 @@ public class MenuWindow
 		//May need to queue font calls with shapes as well, no way to overlay the text and control what is drawn first.
 		if(visible)
 		{
-			batch.draw(windowTexture, xPosition, yPosition, 600, 600);
+			batch.draw(windowTexture, xPosition, yPosition, width, height);
 			titleFont.draw(batch, menuLabel, xPosition, yPosition + height);
 		}
 	}

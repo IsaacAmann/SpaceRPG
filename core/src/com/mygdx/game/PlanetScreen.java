@@ -219,6 +219,7 @@ public class PlanetScreen implements Screen
 		static boolean mouseDown = false;
 		static Vector3 mouse = new Vector3(0,0,0);
 		static Vector3 mouseReal = new Vector3(0,0,0);
+		static Vector3 hudMouse = new Vector3(0,0,0);
 	}
 
 	//GAME OBJECT STUFF ----------------------------------------------------------------------
@@ -261,6 +262,7 @@ public class PlanetScreen implements Screen
 			public boolean mouseMoved(int x, int y)
 			{
 				playerInput.mouseReal.set(x, y, 0);
+				hudCamera.unproject(playerInput.hudMouse.set(x, y, 0));
 				camera.unproject(playerInput.mouse.set(x,y,0));
 				//System.out.println("Real mouse cords x: " + playerInput.mouseReal.x + " y: " + playerInput.mouseReal.y + " Game Cords: x: " + playerInput.mouse.x + " y: " + playerInput.mouse.y);
 				return false;
@@ -392,7 +394,11 @@ public class PlanetScreen implements Screen
 	@Override
 	public void resize(int width, int height)
 	{
-
+		//screenWidth = Gdx.graphics.getWidth();
+		//screenHeight = Gdx.graphics.getHeight();
+		//hudCamera.setToOrtho(false, screenWidth, screenHeight);
+		//camera.setToOrtho(true, screenWidth, screenHeight);
+		
 	}
 
 	@Override
@@ -429,6 +435,12 @@ public class PlanetScreen implements Screen
 		{
 			player.body.applyTorque(force,true);
 		}
+		
+		public void printScreenDimensions()
+		{
+			console.log("screen Width: " + Gdx.graphics.getWidth() + " Screen Height: " + Gdx.graphics.getHeight());
+		}
+		
 		public void displayInventory()
 		{
 			for(int i = 0; i < game.dataStore.playerData.inventory.length; i++)
