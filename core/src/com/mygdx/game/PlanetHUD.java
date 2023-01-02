@@ -9,12 +9,20 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Color;
 import java.util.ArrayList;
 import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.utils.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+
+
 
 public class PlanetHUD
 {
 	private Texture texture;
+	private TextureAtlas textureAtlas;
 	
 	private int screenWidth;
 	private int screenHeight;
@@ -38,6 +46,8 @@ public class PlanetHUD
 		this.texture = texture;
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
+		
+		textureAtlas = game.assets.get("spaceRPGTextures.atlas", TextureAtlas.class);
 		
 		stage = new Stage(new StretchViewport(screenWidth, screenHeight));
 		fillUIElements();
@@ -77,11 +87,11 @@ public class PlanetHUD
 		Table mainTable = new Table();
 		mainTable.setFillParent(true);
 		
-		Image testImage = new Image(PlanetScreen.defaultHumanoidSprite);
-		mainTable.addActor(testImage);
-		
 		stage.addActor(mainTable);
 		
+		InventoryWindow inventoryWindow = new InventoryWindow(game.assets.get("inventoryWindowTexture.png", Texture.class));
+		
+		stage.addActor(inventoryWindow);
 	}
 
 	public void draw(SpriteBatch batch, ShapeRenderer shapeRenderer, ShapeCallContainer shapeCallContainer)

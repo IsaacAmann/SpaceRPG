@@ -25,7 +25,7 @@ public class Sector
 	public void load(float newX)
 	{
 		this.x = newX;	
-		terrain = new TerrainPiece(PlanetScreen.groundTexture, x, y, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
+		terrain = new TerrainPiece(game.assets.get("groundStone.png", Texture.class), x, y, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 		//create physics object
 		isLoaded = true;
 	}

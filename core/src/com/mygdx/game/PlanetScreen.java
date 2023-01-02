@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 
 
@@ -60,19 +61,19 @@ public class PlanetScreen implements Screen
 	public Planet currentPlanet;
 
 	//Sprites and textures
-	public static Texture groundTexture;
+	public Texture groundTexture;
 	public Texture backgroundTexture;
 	public Texture hudTexture;
 	
 	//Window textures
-	public static Texture testWindowTexture;
-	public static Texture inventoryWindowTexture;
+	public Texture testWindowTexture;
+	public Texture inventoryWindowTexture;
 	
 	public ShapeCallContainer shapeCallContainer;
 	public ShapeRenderer shapeRenderer;
 	
 	//Default humanoid Sprites
-	public static TextureRegion defaultHumanoidSprite;
+	public TextureRegion defaultHumanoidSprite;
 	
 	//Physics stuff
 	public static World world;
@@ -93,18 +94,17 @@ public class PlanetScreen implements Screen
 	public PlanetScreen(final game gameObject)
 	{
 		game = gameObject;
+		TextureAtlas textureAtlas = game.assets.get("spaceRPGTextures.atlas", TextureAtlas.class);
 		
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 		shapeRenderer = new ShapeRenderer();
 		shapeCallContainer = new ShapeCallContainer();
 		//Textures and Sprites
-		//playerSprite = game.textureAtlas.findRegion("player");
-		//playerSprite.flip(false,true);
-		backgroundTexture = new Texture(Gdx.files.internal("planet1Background.png"));
+		backgroundTexture = game.assets.get("planet1Background.png", Texture.class);
 		hudTexture = new Texture(Gdx.files.internal("planetHUDTexture.png"));
 		//default humanoid sprites
-		defaultHumanoidSprite = game.textureAtlas.findRegion("defaultHumanoidStanding1");
+		defaultHumanoidSprite = textureAtlas.findRegion("defaultHumanoidStanding1");
 		defaultHumanoidSprite.flip(false,true);
 		
 		//Camera setup
@@ -119,12 +119,12 @@ public class PlanetScreen implements Screen
 		planetHUD = new PlanetHUD(hudTexture);
 
 		//Terrain setup
-		groundTexture = new Texture(Gdx.files.internal("groundStone.png"));
+		groundTexture = game.assets.get("groundStone.png", Texture.class);
 		//testTerrain = new TerrainPiece(groundTexture, 0, 0, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 		
 		//Loading textures for different windows
-		testWindowTexture = new Texture(Gdx.files.internal("testWindow.png"));
-		inventoryWindowTexture = new Texture(Gdx.files.internal("inventoryWindowTexture.png"));
+		testWindowTexture = game.assets.get("testWindow.png", Texture.class);
+		inventoryWindowTexture = game.assets.get("inventoryWindowTexture.png", Texture.class);
 
 		//Physics
 		world = new World(new Vector2(0, GRAVITY), true);
@@ -136,20 +136,22 @@ public class PlanetScreen implements Screen
 		
 		//Input processor
 		InputMultiplexer multiplexer = new InputMultiplexer();
-		multiplexer.addProcessor(new GameInputProcessor());
 		multiplexer.addProcessor(planetHUD.stage);
+		multiplexer.addProcessor(new GameInputProcessor());
+		
 		//Gdx.input.setInputProcessor(new GameInputProcessor());
 		Gdx.input.setInputProcessor(multiplexer);
 		
 		
 		//console setup
+		
 		console = new GUIConsole(true);
 		console.setSizePercent(100f, 100f);
 		console.setPosition(50, 50);
-		console.setVisible(true);
+		console.setVisible(false);
 		console.setCommandExecutor(new ConsoleCommandExecutor());
 		console.setDisplayKeyID(Input.Keys.GRAVE);
-		
+	
 		//Entities
 		player = new Player(defaultHumanoidSprite, 2,0,25,80, 100, 100);
 		//Test inventory item
