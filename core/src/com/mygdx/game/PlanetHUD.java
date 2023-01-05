@@ -97,6 +97,7 @@ public class PlanetHUD
 		//InventoryWindow inventoryWindow = new InventoryWindow(game.assets.get("inventoryWindowTexture.png", Texture.class));
 		inventoryWindow = new InventoryWindow(game.assets.get("uiskin.json", Skin.class));
 		stage.addActor(inventoryWindow);
+		InventoryWindow.draggingItemImage.toFront();
 	}
 
 	public void draw(SpriteBatch batch, ShapeRenderer shapeRenderer, ShapeCallContainer shapeCallContainer)
@@ -104,6 +105,9 @@ public class PlanetHUD
 		//batch.draw(texture, 0, 0, PlanetScreen.screenWidth, PlanetScreen.screenHeight);
 		manageHealthBar(shapeCallContainer);
 		manageEnergyBar(shapeCallContainer);
+		//Offset from actual mouse position, actor gets clicked on instead when placed directly on mouse
+		InventoryWindow.draggingItemImage.setX(PlanetScreen.playerInput.hudMouse.x + 3);
+		InventoryWindow.draggingItemImage.setY(PlanetScreen.playerInput.hudMouse.y + 3);
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
     }

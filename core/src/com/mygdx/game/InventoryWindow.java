@@ -28,7 +28,10 @@ public class InventoryWindow extends Window
 	private Label equipmentTitle;
 	private Label itemTitle;
 	
+	public static Image draggingItemImage;
+	
 	private static ItemImage itemImages[][];
+	public static Item currentMovingItem = null;
 	
 	public InventoryWindow(Skin skin)
 	{
@@ -50,7 +53,7 @@ public class InventoryWindow extends Window
 		{
 			for(int j = 0; j < itemImages[i].length; j++)
 			{
-				itemImages[i][j] = new ItemImage(atlas.findRegion("defaultHumanoidHead"), i, j);
+				itemImages[i][j] = new ItemImage(atlas.findRegion("blankItem"), i, j);
 			}
 		}
 		
@@ -80,10 +83,16 @@ public class InventoryWindow extends Window
 		{
 			for(int j = 0; j < itemImages[i].length; j++)
 			{
-				bottomPane.add(itemImages[i][j]);
+				bottomPane.add(itemImages[i][j]).width(32).height(32);
 			}
 			bottomPane.row();
 		}
+		
+		//draggingItemImage that follows mouse when item is being dragged
+		draggingItemImage = new Image(atlas.findRegion("blankItem"));
+		draggingItemImage.setVisible(false);
+		PlanetHUD.stage.addActor(draggingItemImage);
+		
 		
 		this.setPosition(Gdx.graphics.getWidth()/2 - 350, Gdx.graphics.getHeight()/2);
 		this.pack();
@@ -93,6 +102,13 @@ public class InventoryWindow extends Window
 	public void act(float delta)
 	{
 		super.act(delta);
+		if(currentMovingItem != null)
+		{
+			draggingItemImage.setDrawable(new TextureRegionDrawable(currentMovingItem.texture));
+			draggingItemImage.setVisible(true);
+			
+		}
+		draggingItemImage.toFront();
 		//update inventory data in table
 		
 	}
