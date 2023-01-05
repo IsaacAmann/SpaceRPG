@@ -39,13 +39,18 @@ public class PlanetHUD
 	private float ENERGY_BAR_HEIGHT;
 	
 	//Stage for new window system
-	public Stage stage;
+	public static Stage stage;
+	
+	//Scene2d ui elements
+	public static Window inventoryWindow;
+	
 	
 	public PlanetHUD(Texture texture)
 	{
 		this.texture = texture;
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
+		
 		
 		textureAtlas = game.assets.get("spaceRPGTextures.atlas", TextureAtlas.class);
 		
@@ -89,17 +94,22 @@ public class PlanetHUD
 		
 		stage.addActor(mainTable);
 		
-		InventoryWindow inventoryWindow = new InventoryWindow(game.assets.get("inventoryWindowTexture.png", Texture.class));
-		
+		//InventoryWindow inventoryWindow = new InventoryWindow(game.assets.get("inventoryWindowTexture.png", Texture.class));
+		inventoryWindow = new InventoryWindow(game.assets.get("uiskin.json", Skin.class));
 		stage.addActor(inventoryWindow);
 	}
 
 	public void draw(SpriteBatch batch, ShapeRenderer shapeRenderer, ShapeCallContainer shapeCallContainer)
 	{
-		batch.draw(texture, 0, 0, PlanetScreen.screenWidth, PlanetScreen.screenHeight);
+		//batch.draw(texture, 0, 0, PlanetScreen.screenWidth, PlanetScreen.screenHeight);
 		manageHealthBar(shapeCallContainer);
 		manageEnergyBar(shapeCallContainer);
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
     }
+    
+    public static void resize(int width, int height)
+    {
+		stage.getViewport().update(width, height, true);
+	}
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 
 public class game extends Game {
@@ -48,6 +49,8 @@ public class game extends Game {
 		assets.load("groundStone.png", Texture.class);
 		assets.load("libMono50.fnt", BitmapFont.class);
 		assets.load("libMono15.fnt", BitmapFont.class);
+		assets.load("default.fnt", BitmapFont.class);
+		assets.load("uiskin.json", Skin.class);
 		
 	}
 }

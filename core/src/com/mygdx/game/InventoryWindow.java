@@ -26,16 +26,33 @@ public class InventoryWindow extends Window
 	
 	private Label statTitle;
 	private Label equipmentTitle;
-	public InventoryWindow(Texture texture)
+	private Label itemTitle;
+	
+	private static ItemImage itemImages[][];
+	
+	public InventoryWindow(Skin skin)
 	{
-	    super("Inventory", new WindowStyle(new BitmapFont(), Color.RED, new TextureRegionDrawable(texture)));
-	    //this.setDebug(true);
+	    //super("Inventory", new WindowStyle(new BitmapFont(), Color.RED, new TextureRegionDrawable(texture)));
+	    super("Inventory", skin);
+	    
+	    this.setDebug(true);
 	    
 		this.padTop(100);
+		this.left().top();
+		TextureAtlas atlas = game.assets.get("spaceRPGTextures.atlas", TextureAtlas.class);
+		//BitmapFont font = game.assets.get("libMono15.fnt", BitmapFont.class);
+		BitmapFont font = game.assets.get("default.fnt", BitmapFont.class);
+		font.getData().setScale(.8f);
 		
-		BitmapFont font = game.assets.get("libMono15.fnt", BitmapFont.class);
-		//font.getData().setScale(.25f);
-		
+		//Create array for ItemImages and fill Array 
+		itemImages = new ItemImage[game.dataStore.playerData.inventory.length][game.dataStore.playerData.inventory[0].length];
+		for(int i = 0; i < itemImages.length; i++)
+		{
+			for(int j = 0; j < itemImages[i].length; j++)
+			{
+				itemImages[i][j] = new ItemImage(atlas.findRegion("defaultHumanoidHead"), i, j);
+			}
+		}
 		
 		leftPane = new Table();
 		rightPane = new Table();
@@ -43,16 +60,40 @@ public class InventoryWindow extends Window
 		
 		statTitle = new Label("Player Stats", new LabelStyle(font, Color.BLACK));
 		equipmentTitle = new Label("Equipment", new LabelStyle(font, Color.BLACK));
+		//itemTitle = new Label("Items", new LabelStyle(font, Color.BLACK));
 		
-		this.add(leftPane);
-		this.add(rightPane);
+		//Left, right, bottom pane setup
+		this.add(leftPane).width(400).height(200);
+		this.add(rightPane).width(300).height(200);
 		this.row();
-		this.add(bottomPane);
-		
+		this.add(bottomPane).width(700).colspan(2);
+		//Left Pane elements
 		leftPane.add(statTitle);
+		
+		//Right Pane elements
 		rightPane.add(equipmentTitle);
 		
+		//Bottom Pane elements
+		//bottomPane.add(itemTitle);
+		//add ItemImages to table
+		for(int i = 0; i < itemImages.length; i++)
+		{
+			for(int j = 0; j < itemImages[i].length; j++)
+			{
+				bottomPane.add(itemImages[i][j]);
+			}
+			bottomPane.row();
+		}
+		
+		this.setPosition(Gdx.graphics.getWidth()/2 - 350, Gdx.graphics.getHeight()/2);
 		this.pack();
 	}
 
+	@Override
+	public void act(float delta)
+	{
+		super.act(delta);
+		//update inventory data in table
+		
+	}
 }

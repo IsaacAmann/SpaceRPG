@@ -54,7 +54,7 @@ public class PlanetScreen implements Screen
 
 	public static Player player;
 	public HumanoidV2 testHumanoid;
-	public PlanetHUD planetHUD;
+	public static PlanetHUD planetHUD;
 
 
 	//Set up for map sectors
@@ -329,6 +329,7 @@ public class PlanetScreen implements Screen
 					
 					case Input.Keys.E:
 						//PlanetHUD.inventoryWindow.toggleVisible();
+						PlanetHUD.inventoryWindow.setVisible(!PlanetHUD.inventoryWindow.isVisible());
 					break;
 					
 					case Input.Keys.GRAVE:
@@ -411,7 +412,7 @@ public class PlanetScreen implements Screen
 		//screenHeight = Gdx.graphics.getHeight();
 		//hudCamera.setToOrtho(false, screenWidth, screenHeight);
 		//camera.setToOrtho(true, screenWidth, screenHeight);
-		
+		PlanetHUD.resize(width, height);
 	}
 
 	@Override
