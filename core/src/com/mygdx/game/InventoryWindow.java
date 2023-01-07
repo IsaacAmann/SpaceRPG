@@ -28,7 +28,8 @@ public class InventoryWindow extends Window
 	private Label equipmentTitle;
 	private Label itemTitle;
 	
-	public static Image draggingItemImage;
+	public static DraggingItemCursor draggingItemImage;
+	private TextureRegionDrawable blankItemTexture;
 	
 	private static ItemImage itemImages[][];
 	public static Item currentMovingItem = null;
@@ -38,11 +39,14 @@ public class InventoryWindow extends Window
 	    //super("Inventory", new WindowStyle(new BitmapFont(), Color.RED, new TextureRegionDrawable(texture)));
 	    super("Inventory", skin);
 	    
+	    
 	    this.setDebug(true);
 	    
 		this.padTop(100);
 		this.left().top();
 		TextureAtlas atlas = game.assets.get("spaceRPGTextures.atlas", TextureAtlas.class);
+	    blankItemTexture = new TextureRegionDrawable(atlas.findRegion("blankItem"));
+
 		//BitmapFont font = game.assets.get("libMono15.fnt", BitmapFont.class);
 		BitmapFont font = game.assets.get("default.fnt", BitmapFont.class);
 		font.getData().setScale(.8f);
@@ -89,7 +93,7 @@ public class InventoryWindow extends Window
 		}
 		
 		//draggingItemImage that follows mouse when item is being dragged
-		draggingItemImage = new Image(atlas.findRegion("blankItem"));
+		draggingItemImage = new DraggingItemCursor(blankItemTexture);
 		draggingItemImage.setVisible(false);
 		PlanetHUD.stage.addActor(draggingItemImage);
 		
@@ -102,14 +106,49 @@ public class InventoryWindow extends Window
 	public void act(float delta)
 	{
 		super.act(delta);
-		if(currentMovingItem != null)
+		if(currentMovingItem != null && this.isVisible())
 		{
-			draggingItemImage.setDrawable(new TextureRegionDrawable(currentMovingItem.texture));
+			//May change this later, call setDrawable even when item is not changing may be expensive
+			draggingItemImage.itemImage.setDrawable(new TextureRegionDrawable(currentMovingItem.texture));
 			draggingItemImage.setVisible(true);
-			
+			draggingItemImage.currentNumberItems = currentMovingItem.stack;
+		}
+		else
+		{
+			//draggingItemImage.setDrawable(blankItemTexture);
+			draggingItemImage.setVisible(false);
 		}
 		draggingItemImage.toFront();
 		//update inventory data in table
 		
+	}
+	
+	public class DraggingItemCursor extends Group
+	{
+		public  Image itemImage;
+		public  Label itemNumber;
+		private int currentNumberItems;
+		private TextureRegionDrawable blankTexture;
+		
+		public DraggingItemCursor(TextureRegionDrawable blankTexture)
+		{
+			super();
+			this.blankTexture = blankTexture;
+			this.currentNumberItems = 1;
+			this.itemImage = new Image(blankTexture);
+			this.itemNumber = new Label(""+currentNumberItems, new LabelStyle(game.assets.get("default.fnt", BitmapFont.class), Color.BLACK));
+			this.addActor(itemImage);
+			this.addActor(itemNumber);
+		}
+		
+		@Override
+		public void act(float delta)
+		{
+			super.act(delta);
+			if(currentNumberItems > 1)
+				this.itemNumber.setVisible(true);
+			else
+				this.itemNumber.setVisible(false);
+		}
 	}
 }

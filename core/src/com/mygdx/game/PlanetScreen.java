@@ -330,7 +330,8 @@ public class PlanetScreen implements Screen
 					case Input.Keys.E:
 						//PlanetHUD.inventoryWindow.toggleVisible();
 						PlanetHUD.inventoryWindow.setVisible(!PlanetHUD.inventoryWindow.isVisible());
-						InventoryWindow.draggingItemImage.setVisible(!InventoryWindow.draggingItemImage.isVisible());
+						//InventoryWindow.draggingItemImage.setVisible(!InventoryWindow.draggingItemImage.isVisible());
+						InventoryWindow.draggingItemImage.setVisible(false);
 					break;
 					
 					case Input.Keys.GRAVE:

@@ -16,6 +16,7 @@ public abstract class Item
 	public boolean isStackable;
 	public int maxStack;
 	public TextureRegion texture;
+	public int stack;
 	
 	public Item()
 	{
@@ -25,6 +26,7 @@ public abstract class Item
 		itemID = 0;
 		isStackable = false;
 		maxStack = 1;
+		stack = 1;
 		this.texture = null;
 	}
 	
