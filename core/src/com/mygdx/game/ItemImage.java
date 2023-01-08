@@ -164,8 +164,6 @@ public class ItemImage extends Group
 						InventoryWindow.currentMovingItem = null;
 					}
 				}
-				
-				
 				return true;
 			}
 			

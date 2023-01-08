@@ -157,7 +157,7 @@ public class PlanetScreen implements Screen
 		//Test inventory item
 		ResourceItem testItem = new ResourceItem(defaultHumanoidSprite);
 		for(int i=0; i < 440; i++)
-		game.dataStore.playerData.addInventoryItem(new ResourceItem(defaultHumanoidSprite));
+		game.dataStore.playerData.addInventoryItem(game.itemFactory.getItem(0));
 		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
 
 		//Background

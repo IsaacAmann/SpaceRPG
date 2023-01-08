@@ -145,6 +145,8 @@ public class InventoryWindow extends Window
 		public void act(float delta)
 		{
 			super.act(delta);
+			if(currentMovingItem != null)
+				this.itemNumber.setText(currentMovingItem.stack);
 			if(currentNumberItems > 1)
 				this.itemNumber.setVisible(true);
 			else
