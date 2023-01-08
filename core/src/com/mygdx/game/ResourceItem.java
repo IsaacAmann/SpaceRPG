@@ -18,4 +18,15 @@ public class ResourceItem extends Item
 		this.texture = texture;
 	}	
 	
+	public ResourceItem(ResourceItem item)
+	{
+		super(item);
+		
+	}
+	
+	@Override
+	public ResourceItem clone()
+	{
+		return new ResourceItem(this);
+	}
 }

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public abstract class Item
+public class Item
 {
 	public boolean canDrop;
 	public boolean canEquip;
@@ -30,4 +30,20 @@ public abstract class Item
 		this.texture = null;
 	}
 	
+	public Item(Item item)
+	{
+		this.canDrop = item.canDrop;
+		this.canEquip = item.canEquip;
+		this.isDeployable = item.isDeployable;
+		this.itemID = item.itemID;
+		this.isStackable = item.isStackable;
+		this.maxStack = item.maxStack;
+		this.stack = item.stack;
+		this.texture = item.texture;
+	}
+	
+	public Item clone()
+	{
+		return new Item(this);
+	}
 }

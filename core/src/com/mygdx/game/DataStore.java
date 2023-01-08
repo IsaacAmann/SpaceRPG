@@ -32,6 +32,33 @@ public class DataStore
 		{
 			//Attempt to place the item in the inventory array, return false if it was not added
 			boolean output = false;
+			
+			//If item is stackable, attempt to stack it first with existing items
+			if(item.isStackable)
+			{
+				for(int i = 0; i < inventory.length && output == false; i++)
+				{
+					for(int j = 0; j < inventory[i].length; j++)
+					{
+						if(inventory[i][j] != null)
+						{
+							//Check if itemID matches
+							if(item.itemID == inventory[i][j].itemID)
+							{
+								//Check if the slot can hold the item 
+								if(inventory[i][j].stack + item.stack <= inventory[i][j].maxStack)
+								{
+									//add the stack of the item to the slot
+									inventory[i][j].stack += item.stack;
+									output = true;
+									break;
+								}
+							}	
+						}
+					}
+				}
+			}
+			//Find and place in any empty slot
 			for(int i = 0; i < inventory.length && output == false; i++)
 			{
 				for(int j = 0; j < inventory[i].length; j++)

@@ -136,7 +136,7 @@ public class InventoryWindow extends Window
 			this.blankTexture = blankTexture;
 			this.currentNumberItems = 1;
 			this.itemImage = new Image(blankTexture);
-			this.itemNumber = new Label(""+currentNumberItems, new LabelStyle(game.assets.get("default.fnt", BitmapFont.class), Color.BLACK));
+			this.itemNumber = new Label(""+currentNumberItems, new LabelStyle(game.assets.get("default.fnt", BitmapFont.class), Color.RED));
 			this.addActor(itemImage);
 			this.addActor(itemNumber);
 		}

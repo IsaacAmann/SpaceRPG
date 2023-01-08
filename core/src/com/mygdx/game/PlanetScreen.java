@@ -156,8 +156,8 @@ public class PlanetScreen implements Screen
 		player = new Player(defaultHumanoidSprite, 2,0,25,80, 100, 100);
 		//Test inventory item
 		ResourceItem testItem = new ResourceItem(defaultHumanoidSprite);
-		for(int i=0; i < 40; i++)
-		game.dataStore.playerData.addInventoryItem(testItem);
+		for(int i=0; i < 440; i++)
+		game.dataStore.playerData.addInventoryItem(new ResourceItem(defaultHumanoidSprite));
 		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
 
 		//Background
@@ -229,6 +229,8 @@ public class PlanetScreen implements Screen
 		static boolean left = false;
 		static boolean right = false;
 		static boolean fire = false;
+		static boolean shift = false;
+		static boolean control = false;
 		static boolean mouseDown = false;
 		static Vector3 mouse = new Vector3(0,0,0);
 		static Vector3 mouseReal = new Vector3(0,0,0);
@@ -327,6 +329,13 @@ public class PlanetScreen implements Screen
 						playerInput.right = true;
 					break;
 					
+					case Input.Keys.SHIFT_LEFT:
+						playerInput.shift = true;
+					break;
+					
+					case Input.Keys.CONTROL_LEFT:
+						playerInput.control = true;
+					break;
 					case Input.Keys.E:
 						//PlanetHUD.inventoryWindow.toggleVisible();
 						PlanetHUD.inventoryWindow.setVisible(!PlanetHUD.inventoryWindow.isVisible());
@@ -359,6 +368,14 @@ public class PlanetScreen implements Screen
 					
 					case Input.Keys.D:
 						playerInput.right = false;
+					break;
+					
+					case Input.Keys.SHIFT_LEFT:
+						playerInput.shift = false;
+					break;
+					
+					case Input.Keys.CONTROL_LEFT:
+						playerInput.control = false;
 					break;
 				}
 				return false;
