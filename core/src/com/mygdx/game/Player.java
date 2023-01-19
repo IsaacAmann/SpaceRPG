@@ -18,7 +18,7 @@ public class Player extends Entity
 
 	public Player(TextureRegion textureRegion, float x, float y, int width, int height, int health, int energy)
 	{
-		super(textureRegion, x, y, width, height);
+		super(textureRegion, x, y, width, height, null);
 		startingHealth = health;
 		this.health = health;
 		startingEnergy = energy;
@@ -37,7 +37,7 @@ public class Player extends Entity
 	{
 		if(PlanetScreen.playerInput.up && canJump)
 		{
-			System.out.println("Rotation: " + body.getAngle());
+			//System.out.println("Rotation: " + body.getAngle());
 			//check if player is knocked over by checking the rotation of the box2d body. Also only allow the player to get up if speed is reduced
 			if((this.body.getAngle() > 1.4 || this.body.getAngle() < -1.4)  && Math.abs(this.body.getLinearVelocity().x) < 1)
 			{

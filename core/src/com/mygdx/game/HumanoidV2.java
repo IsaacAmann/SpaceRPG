@@ -23,9 +23,9 @@ public class HumanoidV2 extends Entity
   //Sprites
   //Body sprite is already inherited from Entity class (field is named sprite)
 
-  public HumanoidV2(TextureRegion textureRegion, float x, float y, int width, int height)
+  public HumanoidV2(TextureRegion textureRegion, float x, float y, int width, int height, Sector currentSector)
   {
-    super(textureRegion, x, y, width, height);
+    super(textureRegion, x, y, width, height, currentSector);
    
     //Requires copies of sprites as the sprite class contains position and rotation data
     
@@ -41,10 +41,12 @@ public class HumanoidV2 extends Entity
   public void draw(SpriteBatch batch)
   {
 	super.draw(batch);
-    float bodyAngle = this.body.getAngle() * RADIANS_TO_DEGREES;
-    float bodyX = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS;
-    float bodyY = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS;
-
+	if(this.body != null)
+	{
+		float bodyAngle = this.body.getAngle() * RADIANS_TO_DEGREES;
+		float bodyX = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS;
+		float bodyY = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS;
+	}
   }
 
   

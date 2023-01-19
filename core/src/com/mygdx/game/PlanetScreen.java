@@ -24,7 +24,8 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-
+import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.joints.*;
 
 
 
@@ -131,7 +132,7 @@ public class PlanetScreen implements Screen
 		debugRenderer = new Box2DDebugRenderer();
 
 		//Planet / Sector setup
-		currentPlanet = new Planet(100);
+		currentPlanet = new Planet(10);
 		
 		
 		//Input processor
@@ -158,11 +159,24 @@ public class PlanetScreen implements Screen
 		ResourceItem testItem = new ResourceItem(defaultHumanoidSprite);
 		for(int i=0; i < 440; i++)
 		game.dataStore.playerData.addInventoryItem(game.itemFactory.getItem(0));
-		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
+		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, -3, 25, 80, currentPlanet.rightEdgeSector.data);
 
 		//Background
 		backgroundPosition1 = new Vector2(0, -screenHeight);
 		backgroundPosition2 = new Vector2(-screenWidth, -screenHeight);
+		
+		
+		/*
+		WheelJointDef jointDef = new WheelJointDef();
+		jointDef.bodyA = player.body;
+		jointDef.bodyB = testHumanoid.body;
+		
+		WheelJoint joint = (WheelJoint) world.createJoint(jointDef);
+		joint.enableMotor(true);
+		joint.setMotorSpeed(70);
+		joint.setMaxMotorTorque(22222);
+		joint.setSpringDampingRatio(15);
+		*/
 		
 
 		//Contact Listener
@@ -172,7 +186,7 @@ public class PlanetScreen implements Screen
 			public void beginContact(Contact contact)
 			{
 				
-				System.out.println("Contact");
+				//System.out.println("Contact");
 				if(contact.getFixtureA().getBody() == player.body || contact.getFixtureB().getBody() == player.body)
 				{
 					player.canJump = true;
@@ -243,6 +257,7 @@ public class PlanetScreen implements Screen
 	private void gameLoop()
 	{
 		player.update();
+		//System.out.println("x: " + testHumanoid.x + " y: " + testHumanoid.y);
 		currentPlanet.update();
 	}
 
@@ -462,7 +477,7 @@ public class PlanetScreen implements Screen
 	{
 		public void spawnHuman()
 		{
-			testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80);
+			testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80, currentPlanet.sectors.head.data);
 		}
 		public void fling(float force)
 		{

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Planet
 {
-	private static final int SECTOR_LENGTH = 40;
+	private static final int SECTOR_LENGTH = 20;
 	public static final float PIXELS_TO_METERS = 100f;
 	
 	private int numberSectors;
@@ -17,8 +17,8 @@ public class Planet
 	private int sectorsLoaded;
 	
 	//Reference to the loaded edge sectors, used to monitor when player is approaching the edge of what portion of the world is loaded 
-	private Node<Sector> leftEdgeSector;
-	private Node<Sector> rightEdgeSector;
+	public Node<Sector> leftEdgeSector;
+	public Node<Sector> rightEdgeSector;
 	private int rightEdgeSectorIndex;
 	private int leftEdgeSectorIndex;
 	
