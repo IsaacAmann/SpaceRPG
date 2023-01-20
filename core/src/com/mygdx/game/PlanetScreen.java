@@ -480,6 +480,18 @@ public class PlanetScreen implements Screen
 
 	public class ConsoleCommandExecutor extends CommandExecutor
 	{
+		public void s(int amount)
+		{
+			TextureAtlas textureAtlas = game.assets.get("spaceRPGTextures.atlas", TextureAtlas.class);
+			for(int i = 0; i < amount; i++)
+			{
+				ResourceItem item = new ResourceItem(textureAtlas.findRegion("groundStone"));
+				ItemEntity itemEntity = new ItemEntity(0, -4, textureAtlas.findRegion("groundStone"), item);
+				itemEntity.loaded = true;
+				currentPlanet.leftEdgeSector.data.entityList.add(itemEntity);
+			}
+		}
+		
 		public void spawnHuman()
 		{
 			testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, 0, 25, 80, currentPlanet.sectors.head.data);

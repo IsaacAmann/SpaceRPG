@@ -57,6 +57,10 @@ public class Sector
 	public void draw(SpriteBatch batch)
 	{
 		if(isLoaded)
+		{
 			terrain.draw(batch);
+			for(int i = 0; i < this.entityList.size(); i++)
+				entityList.get(i).draw(batch);
+		}
 	}
 }
