@@ -8,7 +8,7 @@ import java.lang.Math;
 public class Sector
 {
 	private static final int TERRAIN_Y_LEVEL = 6;
-	private static final int SECTOR_LENGTH = 40;
+	public static final int SECTOR_LENGTH = 40;
 
 	public float x;
 	public float y; 
@@ -36,7 +36,8 @@ public class Sector
 		{
 			currentEntity = entityList.get(i);
 			//currentEntity.y = -3;
-			currentEntity.load(xDifference);
+			if(currentEntity.loaded == false)
+				currentEntity.load(xDifference);
 		}	
 		terrain = new TerrainPiece(game.assets.get("groundStone.png", Texture.class), x, y, SECTOR_LENGTH, TERRAIN_Y_LEVEL);
 		//create physics object

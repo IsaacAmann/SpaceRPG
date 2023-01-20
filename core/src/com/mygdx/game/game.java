@@ -17,6 +17,8 @@ public class game extends Game {
 	public static DataStore dataStore;
 	public static AssetManager assets = new AssetManager();
 	public static ItemFactory itemFactory;
+	public static PlanetScreen planetScreen;
+	
 	public void create () {
 		textureAtlas = new TextureAtlas("spaceRPGTextures.atlas");
 		fillAssetManager();
@@ -28,7 +30,8 @@ public class game extends Game {
 			System.out.println("Loading :%" + assets.getProgress());
 		}
 		itemFactory = new ItemFactory();
-		this.setScreen(new PlanetScreen(this));
+		planetScreen = new PlanetScreen(this);
+		this.setScreen(planetScreen);
 		
 	}
 

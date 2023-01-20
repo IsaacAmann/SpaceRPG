@@ -29,4 +29,14 @@ public class CircularLinkedList<T>
 		newNode.next = head;
 		head.previous = newNode;
 	}
+	
+	public Node<T> getFromIndex(int index)
+	{
+		Node<T> foundNode = head;
+		for(int i = 0; i < index; i++)
+		{
+			foundNode = foundNode.next;
+		}
+		return foundNode;
+	}
 }

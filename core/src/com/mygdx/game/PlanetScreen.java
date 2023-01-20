@@ -473,6 +473,11 @@ public class PlanetScreen implements Screen
 
 	}
 
+	public Planet getCurrentPlanet()
+	{
+		return this.currentPlanet;
+	}
+
 	public class ConsoleCommandExecutor extends CommandExecutor
 	{
 		public void spawnHuman()

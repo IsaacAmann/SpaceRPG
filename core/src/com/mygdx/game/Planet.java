@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Planet
 {
-	private static final int SECTOR_LENGTH = 20;
+	public static final int SECTOR_LENGTH = 20;
 	public static final float PIXELS_TO_METERS = 100f;
 	
 	private int numberSectors;
