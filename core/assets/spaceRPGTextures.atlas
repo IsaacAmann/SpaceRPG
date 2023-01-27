@@ -13,7 +13,7 @@ blankItem
   index: -1
 defaultHumanoidArm
   rotate: false
-  xy: 54, 112
+  xy: 260, 333
   size: 10, 20
   orig: 10, 20
   offset: 0, 0
@@ -27,7 +27,7 @@ defaultHumanoidBody
   index: -1
 defaultHumanoidForearm
   rotate: false
-  xy: 29, 64
+  xy: 33, 112
   size: 10, 20
   orig: 10, 20
   offset: 0, 0
@@ -49,8 +49,8 @@ defaultHumanoidLeg
 defaultHumanoidStanding1
   rotate: false
   xy: 2, 86
-  size: 50, 80
-  orig: 50, 80
+  size: 29, 80
+  orig: 29, 80
   offset: 0, 0
   index: -1
 groundStone
@@ -67,9 +67,16 @@ player
   orig: 20, 30
   offset: 0, 0
   index: -1
+stoneItem
+  rotate: false
+  xy: 67, 151
+  size: 15, 15
+  orig: 15, 15
+  offset: 0, 0
+  index: -1
 stoneItemImage
   rotate: false
-  xy: 54, 134
+  xy: 33, 134
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

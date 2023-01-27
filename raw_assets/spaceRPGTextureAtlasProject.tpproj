@@ -34,7 +34,7 @@ prettyPrint=false
 legacyOutput=true
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:defaultHumanoidArm.png,type:Input,regionName:null},{path:defaultHumanoidBody.png,type:Input,regionName:null},{path:defaultHumanoidForearm.png,type:Input,regionName:null},{path:defaultHumanoidHead.png,type:Input,regionName:null},{path:defaultHumanoidLeg.png,type:Input,regionName:null},{path:groundStone.png,type:Input,regionName:null},{path:player.png,type:Input,regionName:null},{path:defaultHumanoidStanding1.png,type:Input,regionName:null},{path:blankItem.png,type:Input,regionName:null},{path:stoneItemImage.png,type:Input,regionName:null}]
+inputFiles=[{path:defaultHumanoidArm.png,type:Input,regionName:null},{path:defaultHumanoidBody.png,type:Input,regionName:null},{path:defaultHumanoidForearm.png,type:Input,regionName:null},{path:defaultHumanoidHead.png,type:Input,regionName:null},{path:defaultHumanoidLeg.png,type:Input,regionName:null},{path:groundStone.png,type:Input,regionName:null},{path:player.png,type:Input,regionName:null},{path:defaultHumanoidStanding1.png,type:Input,regionName:null},{path:blankItem.png,type:Input,regionName:null},{path:stoneItemImage.png,type:Input,regionName:null},{path:stoneItem.png,type:Input,regionName:null}]
 keepInputFileExtensions=false
 
 

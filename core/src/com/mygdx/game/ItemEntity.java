@@ -19,8 +19,13 @@ public class ItemEntity extends Entity
 	
 	public ItemEntity(float x, float y, TextureRegion texture, Item item)
 	{
-		super(texture, x, y, 10, 10, game.planetScreen.getCurrentPlanet().sectors.getFromIndex(0).data);
+		super(texture, x, y, 15, 15, game.planetScreen.getCurrentPlanet().sectors.getFromIndex(0).data);
 		this.item = item;
 	}
 	
+	@Override
+	public void draw(SpriteBatch batch)
+	{
+		super.draw(batch);
+	}
 }

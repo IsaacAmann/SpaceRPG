@@ -154,12 +154,12 @@ public class PlanetScreen implements Screen
 		console.setDisplayKeyID(Input.Keys.GRAVE);
 	
 		//Entities
-		player = new Player(defaultHumanoidSprite, 2,0,25,80, 100, 100);
+		player = new Player(defaultHumanoidSprite, 2,0,29,80, 100, 100);
 		//Test inventory item
 		ResourceItem testItem = new ResourceItem(defaultHumanoidSprite);
 		for(int i=0; i < 440; i++)
 		game.dataStore.playerData.addInventoryItem(game.itemFactory.getItem(0));
-		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, -3, 25, 80, currentPlanet.rightEdgeSector.data);
+		testHumanoid = new HumanoidV2(defaultHumanoidSprite, 3, -3, 29, 80, currentPlanet.rightEdgeSector.data);
 
 		//Background
 		backgroundPosition1 = new Vector2(0, -screenHeight);
@@ -190,7 +190,9 @@ public class PlanetScreen implements Screen
 				if(contact.getFixtureA().getBody() == player.body || contact.getFixtureB().getBody() == player.body)
 				{
 					player.canJump = true;
+					
 				}
+				
 			}
 			@Override
       public void endContact(Contact contact)
@@ -485,8 +487,8 @@ public class PlanetScreen implements Screen
 			TextureAtlas textureAtlas = game.assets.get("spaceRPGTextures.atlas", TextureAtlas.class);
 			for(int i = 0; i < amount; i++)
 			{
-				ResourceItem item = new ResourceItem(textureAtlas.findRegion("groundStone"));
-				ItemEntity itemEntity = new ItemEntity(0, -4, textureAtlas.findRegion("groundStone"), item);
+				ResourceItem item = new ResourceItem(textureAtlas.findRegion("stoneItem"));
+				ItemEntity itemEntity = new ItemEntity(0, -4, textureAtlas.findRegion("stoneItem"), item);
 				itemEntity.loaded = true;
 				currentPlanet.leftEdgeSector.data.entityList.add(itemEntity);
 			}

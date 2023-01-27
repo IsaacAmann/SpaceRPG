@@ -102,10 +102,14 @@ public abstract class Entity
   {
 	if(this.body != null)
 	{
-		x = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS - width;
-		y = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS - height/2;
+		//x = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS - width;
+		//y = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS - height/2;
+		
+		x = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS;
+		y = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS;
+
 		//batch.draw(textureRegion, x, y, width/2, height/2, width, height, 1, 1, this.body.getAngle() * RADIANS_TO_DEGREES);  
-		batch.draw(textureRegion, x, y, width, height/2, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), 1, 1, this.body.getAngle() * RADIANS_TO_DEGREES);
+		batch.draw(textureRegion, x - width/2, y - height/2, width/2, height/2, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), 1, 1, this.body.getAngle() * RADIANS_TO_DEGREES);
 		
 		//Check if the entity has left the bounds of its current sector
 		//Leaving right edge case
