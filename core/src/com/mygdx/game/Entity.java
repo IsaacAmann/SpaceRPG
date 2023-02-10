@@ -65,7 +65,15 @@ public abstract class Entity
 	{
 
 	}
-  
+	//Delete physics body and remove all references to the object
+	public void destroy()
+	{
+		PlanetScreen.entityRemoveList.add(this);
+		//PlanetScreen.world.destroyBody(this.body);
+		//this.body = null;
+		currentSector.entityList.remove(this);
+		
+	}
 	public void unload()
 	{
 		this.oldBodyX = this.body.getPosition().x;
@@ -97,42 +105,47 @@ public abstract class Entity
 		System.out.print("Loaded entity: x: " + body.getPosition().x + " y: " + body.getPosition().y);
 		this.loaded = true;
 	}
-  
-  public void draw(SpriteBatch batch)
-  {
-	if(this.body != null)
+	
+	public void handleCollision(Entity otherEntity)
 	{
-		//x = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS - width;
-		//y = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS - height/2;
-		
-		x = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS;
-		y = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS;
-
-		//batch.draw(textureRegion, x, y, width/2, height/2, width, height, 1, 1, this.body.getAngle() * RADIANS_TO_DEGREES);  
-		batch.draw(textureRegion, x - width/2, y - height/2, width/2, height/2, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), 1, 1, this.body.getAngle() * RADIANS_TO_DEGREES);
-		
-		//Check if the entity has left the bounds of its current sector
-		//Leaving right edge case
-		if(currentSector != null)
+		//System.out.println(this + "Contacted with: " + otherEntity);
+	}
+	
+	public void draw(SpriteBatch batch)
+	{
+		if(this.body != null)
 		{
-			if(this.body.getPosition().x > currentSector.x + currentSector.SECTOR_LENGTH)
+			//x = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS - width;
+			//y = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS - height/2;
+		
+			x = this.body.getPosition().x * PlanetScreen.PIXELS_TO_METERS;
+			y = this.body.getPosition().y * PlanetScreen.PIXELS_TO_METERS;
+
+			//batch.draw(textureRegion, x, y, width/2, height/2, width, height, 1, 1, this.body.getAngle() * RADIANS_TO_DEGREES);  
+			batch.draw(textureRegion, x - width/2, y - height/2, width/2, height/2, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), 1, 1, this.body.getAngle() * RADIANS_TO_DEGREES);
+		
+			//Check if the entity has left the bounds of its current sector
+			//Leaving right edge case
+			if(currentSector != null)
 			{
-				Sector nextSector = game.planetScreen.getCurrentPlanet().sectors.getFromIndex(currentSector.sectorID).next.data;
-				currentSector.entityList.remove(this);
-				nextSector.entityList.add(this);
-				this.currentSector = nextSector;
-				System.out.println("Moved entity to next Sector new sectorID: " + currentSector.sectorID);
-			}
-		//Leaving left edge case
-			if(this.body.getPosition().x < currentSector.x)
-			{
-				Sector nextSector = game.planetScreen.getCurrentPlanet().sectors.getFromIndex(currentSector.sectorID).previous.data;
-				currentSector.entityList.remove(this);
-				nextSector.entityList.add(this);
-				this.currentSector = nextSector;
-				System.out.println("Moved entity to next Sector new sectorID: " + currentSector.sectorID);
+				if(this.body.getPosition().x > currentSector.x + currentSector.SECTOR_LENGTH)
+				{
+					Sector nextSector = game.planetScreen.getCurrentPlanet().sectors.getFromIndex(currentSector.sectorID).next.data;
+					currentSector.entityList.remove(this);
+					nextSector.entityList.add(this);
+					this.currentSector = nextSector;
+					System.out.println("Moved entity to next Sector new sectorID: " + currentSector.sectorID);
+				}
+				//Leaving left edge case
+				if(this.body.getPosition().x < currentSector.x)
+				{
+					Sector nextSector = game.planetScreen.getCurrentPlanet().sectors.getFromIndex(currentSector.sectorID).previous.data;
+					currentSector.entityList.remove(this);
+					nextSector.entityList.add(this);
+					this.currentSector = nextSector;
+					System.out.println("Moved entity to next Sector new sectorID: " + currentSector.sectorID);
+				}
 			}
 		}
 	}
-  }
 }

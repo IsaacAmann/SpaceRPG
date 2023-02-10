@@ -28,7 +28,6 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.*;
 
 
-
 import com.strongjoshua.console.*;
 
 
@@ -81,11 +80,12 @@ public class PlanetScreen implements Screen
 	private ArrayList<Body> terrainSections;
 	private TerrainPiece testTerrain;
 	private Box2DDebugRenderer debugRenderer;
+	public static ArrayList<Entity> entityRemoveList;
 	//Entity stuff
 	
 	//Stores Entity objects, should unload to another array list within the sector when sector is unloaded
 	//When loading from sector, entity objects should be pushed into this list
-	public ArrayList<Entity> loadedEntities;
+	public static ArrayList<Entity> loadedEntities;
 	
 	
 	//debug console 
@@ -96,6 +96,9 @@ public class PlanetScreen implements Screen
 	{
 		game = gameObject;
 		TextureAtlas textureAtlas = game.assets.get("spaceRPGTextures.atlas", TextureAtlas.class);
+		
+		//ArrayList for removed entities
+		entityRemoveList = new ArrayList<Entity>();
 		
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
@@ -192,7 +195,14 @@ public class PlanetScreen implements Screen
 					player.canJump = true;
 					
 				}
-				
+				//Calling handleCollision on both colliding entities 
+				Entity entityA = (Entity) contact.getFixtureA().getBody().getUserData();
+				Entity entityB = (Entity) contact.getFixtureB().getBody().getUserData();
+				if(entityA != null && entityB != null)
+				{
+					entityA.handleCollision(entityB);
+					entityB.handleCollision(entityA);
+				}
 			}
 			@Override
       public void endContact(Contact contact)
@@ -404,6 +414,7 @@ public class PlanetScreen implements Screen
 	{
 		gameLoop();
 		world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+		removeEntities();
 		ScreenUtils.clear(0, 0, .5f, 0);
 		manageCamera();
 		game.batch.setProjectionMatrix(camera.combined);
@@ -434,7 +445,23 @@ public class PlanetScreen implements Screen
 		
 
 	}
-
+	//removes all entities at once after world.step()
+	//Receives an error otherwise if trying to remove bodies elsewhere
+	private void removeEntities()
+	{
+		Iterator<Entity> iterator = entityRemoveList.iterator();
+		Entity currentEntity;
+		while(iterator.hasNext())
+		{
+			currentEntity = iterator.next();
+			world.destroyBody(currentEntity.body);
+			System.out.println("Removed");
+			loadedEntities.remove(currentEntity);
+			//iterator.remove();
+		}
+		entityRemoveList.clear();
+	}
+	
 	@Override
 	public void dispose()
 	{

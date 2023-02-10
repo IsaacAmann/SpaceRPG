@@ -78,4 +78,18 @@ public class Player extends Entity
 	{
 		return body.getPosition().y;
 	}
+	
+	@Override 
+	public void handleCollision(Entity otherEntity)
+	{
+		//Case where colliding with itemEntity
+		if(otherEntity instanceof ItemEntity)
+		{
+			game.dataStore.playerData.addInventoryItem(((ItemEntity) otherEntity).item);
+			otherEntity.destroy();
+		}
+	}
 }
+
+
+
